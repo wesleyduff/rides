@@ -6,6 +6,7 @@
 var express = require('express');
 var db = require('./model/db');
 var routes = require('./routes');
+var ride = require('./routes/ride');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
@@ -31,18 +32,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// ROUTES BASIC
 app.get('/', routes.index);
-//// USER ROUTES
-app.get('/user', user.index);          // Current user profile
-app.get('/user/new', user.create);     // Create new user form
-app.post('/user/save', user.doCreate);  // Create new user action
-//app.get('/user/edit', user.edit);      // Edit current user form
-//app.post('/user/edit', user.doEdit);   // Edit current user action
-//qpp.get('/user/delete', user.confirmDelete); // delete current//user form
-//app.post('/user/delete', user.doDelete);     // Delete current//user action
-//app.get('/login', user.login);          // Login form
-//app.post('/login', user.doLogin);       // Login action
-//app.get('/logout', user.doLogout);      // Logout current user
+
+// RIDES ROUTES
+app.get('/ride/new', ride.index);
+app.post('/ride/new', ride.doCreate);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

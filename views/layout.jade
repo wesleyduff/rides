@@ -1,10 +1,47 @@
 doctype 5
-html(ng-app="app")
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', type='text/javascript')
-    script(src='http://code.angularjs.org/1.2.0-rc.3/angular.min.js', type='text/javascript')
-    script(src='/javascripts/script.js', type='text/javascript')
-  body(ng-controller="Ctrl")
-    block content
+html(ng-app="app", lang="en")
+	head
+		title= title
+		meta(name='viewport' content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+		link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
+		link(rel='stylesheet', href='/stylesheets/datepicker.css')
+		script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', type='text/javascript')
+		script(src='http://code.angularjs.org/1.2.0-rc.3/angular.min.js', type='text/javascript')
+		script(src='/javascripts/bootstrap.min.js' type='text/javascript')
+		script(src='/javascripts/script.js', type='text/javascript')
+		script(src='/javascripts/bootstrap-datepicker.js', type='text/javascript')
+		block headjs
+	body(ng-controller="Ctrl")
+		.navbar.navbar-inverse.navbar-fixed-top
+			.navbar-inner
+				.container
+					button(type="button", class="btn btn-navbar", data-toggle="collapse", data-target=".nav-collapse")
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.brand
+						| Rides
+					.nav-collapse.collapse
+						ul.nav
+							li.active
+								a(href="/")
+									| Current
+							li.divider-vertical
+							li
+								a
+									| Upcoming
+							li.divider-vertical
+							li
+								a
+									| Past
+							li
+								a(href="/ride/new")
+									| Add a Ride
+						form.navbar-form.pull-right
+							input(type="text", class="span2", placeholder="Email")
+							input(type="text", class="span2", type="password", placeholder="Password")
+							button(type="submit", class="btn")
+								| Sign in
+		block content

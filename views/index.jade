@@ -1,5 +1,25 @@
 extends layout
-
 block content
-  h1= title
-  p Welcome to #{title}
+	#userPage(ng-controller="homeCtrl")
+		
+		.hero-unit
+			h1 Ride List
+			p
+				| This is a list of latest rides
+		.row.ride-group
+			.span9
+				h3.text-center 
+					| Cat 2
+					span.large-badge 
+						| 3
+		.row.ride-group
+			.span9
+				h3.text-center
+					| cat 3
+			.span9
+		.row.ride-group
+			.span9
+				h3.text-center
+					| cat 4-5
+					span.large-badge 
+						| 1

@@ -49,3 +49,14 @@ var userSchema = new mongoose.Schema({
 
 // Build the User model
 mongoose.model( 'User', userSchema );
+
+
+var rideSchema = new mongoose.Schema({
+	name: String,
+	createdOn: { type: Date, default: Date.now },
+	scheduledFor: {type : Date},
+});
+
+// Build the User model
+mongoose.model( 'Ride', rideSchema );
+

@@ -6,3 +6,39 @@ body {
 a {
   color: #00B7FF;
 }
+.ride-group {
+	background-color:#3DC8F2;
+	color: white;
+	border-radius:5px;
+	border-bottom:1px solid white;
+}
+.ride-group h3 {
+	position:relative;
+}
+.large-badge {
+	border-radius:10px;
+	padding:2px 6px;
+	background-color:white;
+	color:#3DC8F2;
+	position:absolute;
+	left:10px;
+}
+/* Large desktop */
+@media (min-width: 1200px) {
+	
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width:979px){
+	
+}
+
+/*landscape phone to portrait tablet */
+@media (max-width: 767px) {
+	
+}
+
+/* Landscape phones and down*/
+@media (max-width: 480px) {
+	
+}

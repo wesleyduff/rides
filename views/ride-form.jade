@@ -1,0 +1,27 @@
+extends layout
+block headjs
+	script()
+		$(function(){
+			var scheduler = $('#scheduledFor').datepicker()
+				.on('changeDate', function(ev) { 
+					scheduler.setDate(new Date(ev.Date));
+					scheduler.hide(); 
+				});
+		});
+	
+block content
+
+	form(ng-submit="addRIde()", id="frmAddRide")
+		fieldset
+			legend
+				| Add Ride
+			.form-item
+				label(for="name")
+				input(type="text", name="name", id="name", placeholder="Name")
+			.form-item
+				div(class="input-append date", id="scheduledFor", data-date="12-02-2012", data-date-format="dd-mm-yyyy")
+					input(class="span2", size="16", type="text", value="12-02-2012")
+					span.add-on
+						i.icon-th			
+				
+			
