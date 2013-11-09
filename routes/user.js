@@ -25,20 +25,33 @@ exports.index = function (req, res) {
 };*/
 
 exports.getUsers = function(req, res) {
-    res.json({"status" : "error", "error" : "This needs to be implementd : get Users"});
+    res.json([{"status" : "error", "error" : "This needs to be implementd : get Users"}]);
 };
 
 exports.createNewUser = function(req, res){
-    res.json({"status" : "error", "error" : "This needs to be implementd : create New User"});
+    res.json([{"status" : "error", "error" : "This needs to be implementd : create New User"}]);
 };
+
+exports.checkLoginStatus = function(req, res){
+    if(req.session.loggedIn){
+        res.json([{"status" : "success"}, req.session.user]);
+    } else {
+        res.json([{"status" : false }]);
+    }
+};
+
+exports.doLogin = function(req, res){
+    res.json([{"status" : "error", "error" : "This needs to be implemented : do login"}]);
+}
 
 
 // POST new user creation form
 exports.doCreate = function (req, res) {
     //console.log(req);
     User.create({
-        name: req.body.fullName,
+        name: req.body.name,
         email: req.body.email,
+        password: req.body.password,
         modifiedOn: req.body.modifiedOn,
         lastLogin: req.body.lastLogin
     }, function (err, user) {

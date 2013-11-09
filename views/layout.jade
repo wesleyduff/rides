@@ -13,7 +13,7 @@ html(ng-app="app", lang="en")
 		script(src='/javascripts/script.js', type='text/javascript')
 		script(src='/javascripts/bootstrap-datepicker.js', type='text/javascript')
 		block headjs
-	body(ng-controller="Ctrl")
+	body(ng-controller="MainCtrl" ng-init="initPage()")
 		.navbar.navbar-inverse.navbar-fixed-top
 			.navbar-inner
 				.container
@@ -21,8 +21,9 @@ html(ng-app="app", lang="en")
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
+					.login-success-view(style="display:none")
 					a.brand
-						| Rides
+						| {{rides}}
 					.nav-collapse.collapse
 						ul.nav
 							li.active
@@ -39,9 +40,13 @@ html(ng-app="app", lang="en")
 							li
 								a(href="/ride/new")
 									| Add a Ride
-						form.navbar-form.pull-right
-							input(type="text", class="span2", placeholder="Email")
-							input(type="text", class="span2", type="password", placeholder="Password")
-							button(type="submit", class="btn")
+						form(ng-submit="doLogin()", method="post").navbar-form.pull-right#loginForm
+							input(type="text", class="span2", placeholder="Email", name="email")
+							input(type="text", class="span2", type="password", placeholder="Password", name="password")
+							button(type="submit").btn
 								| Sign in
+							a#login(href="javascript:alert('not yet implemented')")
+								| Register
+							b(style="display:none").login-message
+
 		block content

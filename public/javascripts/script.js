@@ -13,6 +13,12 @@ angular.module('app', [])
     },
     saveUser : function(_jsonUser, callback){
       $http.post('/user/new', _jsonUser).success(callback);
+    },
+    checkForLogedInUser : function(callback){
+      $http.get('/checkLoginStatus')
+    },
+    loginUser : function(_creds, callback){
+      $http.post('/login').success(callback);
     }
   }
 })
@@ -29,42 +35,40 @@ angular.module('app', [])
       }
     }
 })
-.factory('groupFactory', function($http){
-    return {
-      getGroup : function(_groupId){
-        $http.post('/group/' + _groupId);
-      },
-      getGroups : function(callback){
-        $http.get('/groups').success(callback);
-      },
-      saveGroup : function(_jsonGroup, callback){
-        $http.post('/group/new', _jsonGroup).success(callback);
-      }
-    }
-})
-
 /* ***************************************
 **       CONTROLLERS 
 **************************************** */
-.controller('Ctrl', ['$scope', '$http', 'userFactory', function ($scope, $http, userFactory) {
-    $scope.name = 'Whirled';
-    $scope.fullName = "Wesley Duff";
-    $scope.email = "slysop@gmail.com";
-    $scope.submit = function () {
-        var user = {
-            fullName: this.fullName,
-            email: this.email,
-            modifiedOn: Date.now(),
-            lastLogin: Date.now()
+.controller('MainCtrl', ['$scope', '$http', 'userFactory', function ($scope, $http, userFactory) {
+    $scope.rides = "Rides";
+    $scope.initPage = function(){
+      var obj = userFactory.checkForLogedInUser(function(result){
+        if(result.length > 0 && result[0].status !== "error"){
+          $('#loginForm').hide(); //Hide the login because they do not need it.
+          //Displaly their name at the top of the page
+          $('.login-success-view').text('Hello ' + result.name);
+          $('.login-success-view').fadeIn();
+          var updatedUser = json.parse(result[0].user);
+          updateUser.lastLogin = Date().now();
+          //TODO: UPDATE user with id
         }
-        var jsonUser = JSON.stringify(user);
-        var obj = userFactory.saveUser(jsonUser, function(result){
-          if(result.status === "error"){
-            $('#errorMessage').html('Error saveing user : ' + user.fullName);
-          } else {
-            $('#errorMessage').html('Saved User: ' + result.name);
-          }
-        });
+      });
+    }
+    $scope.doLogin = function(){
+      var creds = {
+            email: this.email,
+            password: this.password
+      };
+      var jsonCreds = JSON.stringify(creds);
+      var obj = userFactory.loginUser(jsonCreds, function(result){
+        if(result.length > 0 && result[0].status === "error"){
+          $('.login-error').text(result.error);
+          $('.login-error').addClass('.error').show();
+        } else {
+          $('.login-success-view').text('Hello ' + result.name);
+          $('.login-success-view').fadeIn();
+          $('#loginForm').hide(); //Hide the login because they do not need it.
+        }
+      });
     };
 }])
 .controller('UserPage', ['$scope', function($scope) {

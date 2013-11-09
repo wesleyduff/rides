@@ -55,47 +55,25 @@ var rideSchema = new mongoose.Schema({
     type : mongoose.Schema.Types.ObjectId, 
     ref: 'User',
     required : true
-  }
+  },
+  belongsToGroup : Number
 });
 
 // Build the User model
 mongoose.model( 'Ride', rideSchema );
 
-
-/* ********************************************
-      Group SCHEMA
-   ******************************************** */
-var groupSchema = new mongoose.Schema({
-  cat: {
-    type: Number, 
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  rides : [rideSchema]
-});
-
-// Build the User model
-mongoose.model( 'Group', groupSchema );
-
 /* ********************************************
       USER SCHEMA
    ******************************************** */
 var userSchema = new mongoose.Schema({
-  name: {type: String, required: true, validate: validateLength},
-  email: {type: String, unique:true},
+  name: {type: String, required: true},
+  email: {type: String, unique:true, required: true},
+  password: {type: string, required: true},
   createdOn: { type: Date, default: Date.now },
   modifiedOn: Date,
   lastLogin: Date,
-  cat: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Group'
-  }
+  cat: Number
 });
 
 // Build the User model
 mongoose.model( 'User', userSchema );
-
-
