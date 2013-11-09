@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 var Ride = mongoose.model('Ride');
 
-exports.index = function(req, res) {
-	res.render('ride-form');
-}
+exports.getRides = function(req, res) {
+    res.json({"status" : "error", "error" : "This needs to be implementd : get Rides"});
+};
 
-exports.doCreate = function(req, res) {
-	res.render('ride-form');
-}
+exports.createNewRide = function(req, res){
+    res.json({"status" : "error", "error" : "This needs to be implementd : create New Ride"});
+};

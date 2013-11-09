@@ -36,27 +36,66 @@ process.on('SIGINT', function() {
   });
 });
 
+
+/* ********************************************
+      Ride SCHEMA
+   ******************************************** */
+var rideSchema = new mongoose.Schema({
+  title: {
+    type: String, 
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  createdOn: { type: Date, default: Date.now },
+  scheduledForDate: {type : Date},
+  createdBy : {
+    type : mongoose.Schema.Types.ObjectId, 
+    ref: 'User',
+    required : true
+  }
+});
+
+// Build the User model
+mongoose.model( 'Ride', rideSchema );
+
+
+/* ********************************************
+      Group SCHEMA
+   ******************************************** */
+var groupSchema = new mongoose.Schema({
+  cat: {
+    type: Number, 
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  rides : [rideSchema]
+});
+
+// Build the User model
+mongoose.model( 'Group', groupSchema );
+
 /* ********************************************
       USER SCHEMA
    ******************************************** */
 var userSchema = new mongoose.Schema({
-  name: String,
+  name: {type: String, required: true, validate: validateLength},
   email: {type: String, unique:true},
   createdOn: { type: Date, default: Date.now },
   modifiedOn: Date,
-  lastLogin: Date
+  lastLogin: Date,
+  cat: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Group'
+  }
 });
 
 // Build the User model
 mongoose.model( 'User', userSchema );
 
-
-var rideSchema = new mongoose.Schema({
-	name: String,
-	createdOn: { type: Date, default: Date.now },
-	scheduledFor: {type : Date},
-});
-
-// Build the User model
-mongoose.model( 'Ride', rideSchema );
 

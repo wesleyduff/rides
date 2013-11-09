@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-// GET user creation form
+/*// GET user creation form
 exports.create = function (req, res) {
     res.render('user-form', {
         title: 'Create user',
@@ -22,7 +22,16 @@ exports.index = function (req, res) {
 			title : "Welcome User"
 		});
 	}
+};*/
+
+exports.getUsers = function(req, res) {
+    res.json({"status" : "error", "error" : "This needs to be implementd : get Users"});
 };
+
+exports.createNewUser = function(req, res){
+    res.json({"status" : "error", "error" : "This needs to be implementd : create New User"});
+};
+
 
 // POST new user creation form
 exports.doCreate = function (req, res) {

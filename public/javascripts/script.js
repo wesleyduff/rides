@@ -5,13 +5,42 @@ angular.module('app', [])
 **************************************** */
 .factory('userFactory', function($http){
   return {
-    getUser : function(){
-      return [{"user" : "wes"}];
+    getUser : function(_userId){
+      $http.post('/user/' + _userId);
     },
-    saveUser : function(jsonUser, callback){
-      $http.post('/user/save', jsonUser).success(callback);
+    getUsers : function(callback){
+      $http.get('/users').success(callback);
     },
+    saveUser : function(_jsonUser, callback){
+      $http.post('/user/new', _jsonUser).success(callback);
+    }
   }
+})
+.factory('rideFactory', function($http){
+    return {
+      getRide : function(_rideId){
+        $http.post('/ride/' + _rideId);
+      },
+      getRides : function(callback){
+        $http.get('/rides').success(callback);
+      },
+      saveRide : function(_jsonRide, callback){
+        $http.post('/ride/new', _jsonRide).success(callback);
+      }
+    }
+})
+.factory('groupFactory', function($http){
+    return {
+      getGroup : function(_groupId){
+        $http.post('/group/' + _groupId);
+      },
+      getGroups : function(callback){
+        $http.get('/groups').success(callback);
+      },
+      saveGroup : function(_jsonGroup, callback){
+        $http.post('/group/new', _jsonGroup).success(callback);
+      }
+    }
 })
 
 /* ***************************************

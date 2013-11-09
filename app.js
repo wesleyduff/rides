@@ -8,6 +8,7 @@ var db = require('./model/db');
 var routes = require('./routes');
 var ride = require('./routes/ride');
 var user = require('./routes/user');
+var group = require('./routes/group');
 var http = require('http');
 var path = require('path');
 
@@ -35,9 +36,17 @@ if ('development' == app.get('env')) {
 // ROUTES BASIC
 app.get('/', routes.index);
 
+//USER ROUTES
+app.get('/users', user.getUsers); //get a list of users from the API
+app.post('/user/new', user.createNewUser); //Create a new user
+
 // RIDES ROUTES
-app.get('/ride/new', ride.index);
-app.post('/ride/new', ride.doCreate);
+app.get('/rides', ride.getRides); //get a list of rides from the API
+app.post('/ride/new', ride.createNewRide); //Create a new Ride
+
+// Cat. (Group) ROUTES
+app.get('/groups', group.getGroups); //get a list of groups from the API
+app.post('/group/new', group.createNewGroup) //Create a new Group
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
