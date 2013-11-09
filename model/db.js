@@ -68,7 +68,7 @@ mongoose.model( 'Ride', rideSchema );
 var userSchema = new mongoose.Schema({
   name: {type: String, required: true},
   email: {type: String, unique:true, required: true},
-  password: {type: string, required: true},
+  password: {type: String, required: true},
   createdOn: { type: Date, default: Date.now },
   modifiedOn: Date,
   lastLogin: Date,

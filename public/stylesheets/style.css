@@ -23,6 +23,11 @@ a {
 	position:absolute;
 	left:10px;
 }
+.navbar-form a#login {
+	margin-left: 10px;
+	position:relative;
+	top:5px;
+}
 /* Large desktop */
 @media (min-width: 1200px) {
 	
