@@ -39,7 +39,7 @@ angular.module('app', [])
 **       CONTROLLERS 
 **************************************** */
 .controller('MainCtrl', ['$scope', '$http', 'userFactory', function ($scope, $http, userFactory) {
-    $scope.rides = "Rides";
+    $scope.rides = "Rides"; //doing thi sto make sure angular is working. Remove when tested.
     $scope.initPage = function(){
       var obj = userFactory.checkForLogedInUser(function(result){
         if(result.length > 0 && result[0].status !== "error"){
@@ -61,8 +61,17 @@ angular.module('app', [])
       var jsonCreds = JSON.stringify(creds);
       var obj = userFactory.loginUser(jsonCreds, function(result){
         if(result.length > 0 && result[0].status === "error"){
-          $('.login-error').text(result.error);
-          $('.login-error').addClass('.error').show();
+          var error = result[0].error, //error is an array. ONLY for this response
+              _html;
+          for(var i = 0; i < error.length; i++){
+            if(i === error.length - 1){
+              _html += error[i];
+            } else {
+              _html += error[i] + "<br />";
+            }
+          }
+          $('.login-error').html(_html);
+          $('.login-error').addClass('.error').show(); //add class .error to show red text. Show the DOM element becuase it is hidden on default
         } else {
           $('.login-success-view').text('Hello ' + result.name);
           $('.login-success-view').fadeIn();

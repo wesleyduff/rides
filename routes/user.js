@@ -39,9 +39,19 @@ exports.checkLoginStatus = function(req, res){
         res.json([{"status" : false }]);
     }
 };
-
+//This method if status === error then error is an array. This is different than the others
 exports.doLogin = function(req, res){
-    res.json([{"status" : "error", "error" : "This needs to be implemented : do login"}]);
+    var error = [];
+    error.push('This needs to be implemented : do login'); //init setup
+    res.json([{"status" : "error", "error" : error}]);
+    //check to see if an email was provided
+      //if email is not valid then update the 
+    //if email is valid check password
+      //if password was not provided then return error
+    //if those two senarious pass then
+        //need to saerch all the users for the email that was applied. Emails should be unique according to the schema.
+        //if found return user
+        //if not found return error
 }
 
 
