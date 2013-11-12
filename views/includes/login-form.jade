@@ -1,0 +1,8 @@
+form(ng-submit="doLogin()", method="post").navbar-form.pull-right#loginForm
+	input(type="text", class="span2", placeholder="Email", name="email")
+	input(type="text", class="span2", type="password", placeholder="Password", name="password")
+	button(type="submit").btn
+		| Sign in
+	a(href="#register-form", data-toggle="modal") 
+		| Register
+	b(style="display:none").login-message

@@ -22,6 +22,7 @@ html(ng-app="app", lang="en")
 						span.icon-bar
 						span.icon-bar
 					.login-success-view(style="display:none").text-info
+						.not-you
 					a.brand
 						| {{rides}}
 					.nav-collapse.collapse
@@ -40,37 +41,7 @@ html(ng-app="app", lang="en")
 							li
 								a(href="/ride/new")
 									| Add a Ride
-						form(ng-submit="doLogin()", method="post").navbar-form.pull-right#loginForm
-							input(type="text", class="span2", placeholder="Email", name="email")
-							input(type="text", class="span2", type="password", placeholder="Password", name="password")
-							button(type="submit").btn
-								| Sign in
-							a(href="#register-form", data-toggle="modal") 
-								| Register
-							b(style="display:none").login-message
-			#register-form.modal.hide.fade(tabindex="-1", role="dialog", aria-labelledby="registerModalHeader", aria-hidden="true")
-				.modal-header
-					button(type="button", data-dismiss="modal", aria-hidden="true").close x
-					h3#registerModalHeader Register
-				.modal-body
-					form(ng-submit="doRegister()").form
-						.registerError.text-error
-						fieldset
-							.form-element
-								select.raceCategory
-									option seelect your race category
-									option cat 2
-									option cat 3
-									option cat 4
-									option cat 5
-							.form-element
-								input(type="text", ng-model="name", placeholder="Name")
-							.form-element
-								input(type="text", ng-model="email", placeholder="e-mail")
-							.form-element
-								input(type="text", ng-model="password", placeholder="password")
-							input(type="submit", value="Register").btn.btn-primary
-				.modal-footer
-					button(data-dismiss="modal", aria-hidden="true").Close
+						include includes/login-form.jade
+			include includes/register-form.jade
 
 		block content
