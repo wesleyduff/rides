@@ -11,11 +11,11 @@ angular.module('app', [])
     getUsers : function(callback){
       $http.get('/users').success(callback);
     },
-    saveUser : function(_jsonUser, callback){
-      $http.post('/user/new', _jsonUser).success(callback);
+    registerUser : function(_jsonUser, callback){
+      $http.post('/api/registerUser', _jsonUser).success(callback);
     },
     checkForLogedInUser : function(callback){
-      $http.get('/checkLoginStatus')
+      $http.get('/checkLoginStatus').success(callback);
     },
     loginUser : function(_creds, callback){
       $http.post('/login').success(callback);
@@ -41,15 +41,40 @@ angular.module('app', [])
 .controller('MainCtrl', ['$scope', '$http', 'userFactory', function ($scope, $http, userFactory) {
     $scope.rides = "Rides"; //doing thi sto make sure angular is working. Remove when tested.
     $scope.initPage = function(){
-      var obj = userFactory.checkForLogedInUser(function(result){
-        if(result.length > 0 && result[0].status !== "error"){
-          $('#loginForm').hide(); //Hide the login because they do not need it.
+      userFactory.checkForLogedInUser(function(result){
+        if(result.length && result[0].status === "success"){
+          $('#loginForm').remove(); //Hide the login because they do not need it.
           //Displaly their name at the top of the page
+          $('.login-success-view').text('Hello ' + result[1].name);
+          $('.login-success-view').fadeIn();
+          updateUser = result[1];
+          updateUser.lastLogin = Date().now;
+          //TODO: UPDATE user with id
+        };
+      });
+    };
+    $scope.doRegister = function(){
+      if($('.raceCategory option:selected').index() == 0){
+        $('.registerError').text("Please select your race category");
+        return;
+      }
+      var User = {
+        name : this.name,
+        email : this.email,
+        password : this.password,
+        modifiedOn: Date.now(),
+        lastLogin: Date.now(),
+        cat: this.cat
+      }
+      var jsonUser = JSON.stringify(User);
+      userFactory.registerUser(jsonUser, function(result){
+        if(result.length && result[0].status === "error"){
+          $('.registerError').text(result[0].error);
+        } else {
+          $('#register-form button.close').click();//close the modal : Find a better way of doing this
+          //show logged in user
           $('.login-success-view').text('Hello ' + result.name);
           $('.login-success-view').fadeIn();
-          var updatedUser = json.parse(result[0].user);
-          updateUser.lastLogin = Date().now();
-          //TODO: UPDATE user with id
         }
       });
     }

@@ -28,6 +28,18 @@ a {
 	position:relative;
 	top:5px;
 }
+.login-success-view {
+	position: absolute;
+    right: 100px;
+    top: 15px;
+}
+/* *******************
+** BOOTSTRAP OVERRIDES
+******************** */
+.text-error {
+	margin:10px 0;
+}
+
 /* Large desktop */
 @media (min-width: 1200px) {
 	

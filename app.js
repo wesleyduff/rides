@@ -8,6 +8,7 @@ var db = require('./model/db');
 var routes = require('./routes');
 var ride = require('./routes/ride');
 var user = require('./routes/user');
+var api = require('./routes/api');
 var http = require('http');
 var path = require('path');
 
@@ -41,7 +42,9 @@ app.post('/login', user.doLogin); //login user
 
 //USER ROUTES
 app.get('/users', user.getUsers); //get a list of users from the API
-app.post('/user/new', user.createNewUser); //Create a new user
+
+//API calls
+app.post('/api/registerUser', api.registerUser); //Create a new user
 
 // RIDES ROUTES
 app.get('/rides', ride.getRides); //get a list of rides from the API

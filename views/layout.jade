@@ -13,7 +13,7 @@ html(ng-app="app", lang="en")
 		script(src='/javascripts/script.js', type='text/javascript')
 		script(src='/javascripts/bootstrap-datepicker.js', type='text/javascript')
 		block headjs
-	body(ng-controller="MainCtrl" ng-init="initPage()")
+	body(ng-controller="MainCtrl", ng-init="initPage()")
 		.navbar.navbar-inverse.navbar-fixed-top
 			.navbar-inner
 				.container
@@ -21,7 +21,7 @@ html(ng-app="app", lang="en")
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					.login-success-view(style="display:none")
+					.login-success-view(style="display:none").text-info
 					a.brand
 						| {{rides}}
 					.nav-collapse.collapse
@@ -54,7 +54,15 @@ html(ng-app="app", lang="en")
 					h3#registerModalHeader Register
 				.modal-body
 					form(ng-submit="doRegister()").form
+						.registerError.text-error
 						fieldset
+							.form-element
+								select.raceCategory
+									option seelect your race category
+									option cat 2
+									option cat 3
+									option cat 4
+									option cat 5
 							.form-element
 								input(type="text", ng-model="name", placeholder="Name")
 							.form-element
