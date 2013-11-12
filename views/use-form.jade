@@ -1,0 +1,12 @@
+extends layout
+block content
+
+	form(ng-submit="doRegister()")#register-form.form
+		fieldset
+			.form-element
+				input(type="text", ng-model="name", placeholder="Name")
+			.form-element
+				input(type="text", ng-model="email", placeholder="e-mail")
+			.form-element
+				input(type="text", ng-model="password", placeholder="password")
+			input(type="submit, value="Register").btn.btn-primary

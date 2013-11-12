@@ -45,8 +45,24 @@ html(ng-app="app", lang="en")
 							input(type="text", class="span2", type="password", placeholder="Password", name="password")
 							button(type="submit").btn
 								| Sign in
-							a#login(href="javascript:alert('not yet implemented')")
-								|Register
+							a(href="#register-form", data-toggle="modal") 
+								| Register
 							b(style="display:none").login-message
+			#register-form.modal.hide.fade(tabindex="-1", role="dialog", aria-labelledby="registerModalHeader", aria-hidden="true")
+				.modal-header
+					button(type="button", data-dismiss="modal", aria-hidden="true").close x
+					h3#registerModalHeader Register
+				.modal-body
+					form(ng-submit="doRegister()").form
+						fieldset
+							.form-element
+								input(type="text", ng-model="name", placeholder="Name")
+							.form-element
+								input(type="text", ng-model="email", placeholder="e-mail")
+							.form-element
+								input(type="text", ng-model="password", placeholder="password")
+							input(type="submit", value="Register").btn.btn-primary
+				.modal-footer
+					button(data-dismiss="modal", aria-hidden="true").Close
 
 		block content

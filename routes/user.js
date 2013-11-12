@@ -29,7 +29,46 @@ exports.getUsers = function(req, res) {
 };
 
 exports.createNewUser = function(req, res){
-    res.json([{"status" : "error", "error" : "This needs to be implementd : create New User"}]);
+    User.create({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        modifiedOn: req.body.modifiedOn,
+        lastLogin: req.body.lastLogin
+    }, function (err, user){
+        if(err){
+            console.log("error : ==== " + err);
+            if (err.code === 11000) {
+                res.json(
+                    [
+                        {
+                            "status" : "error",
+                            "error" : "User already exists."
+                        }
+                    ]
+                )
+            } else {
+                res.json(
+                    [
+                        {
+                            "status" : "error", 
+                            "error" : "Error adding user: " + req.body.fullName
+                        }
+                    ]
+                );
+            }
+        } else {
+            //success
+            console.log("User cretated and savced: " + user);
+            req.session.user = { 
+                "name" : user.name, 
+                "email": user.email, 
+                "_id": user._id 
+            };
+            req.session.loggedIn = true;
+            res.json(user);
+        }
+    });
 };
 
 exports.checkLoginStatus = function(req, res){
