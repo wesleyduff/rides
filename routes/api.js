@@ -22,18 +22,72 @@ exports.checkLoginStatus = function(req, res){
 //----Login User
 //--------------------------------------------------------------
 exports.doLogin = function(req, res){
+    
+    console.log(req.body.email);
     var error = [];
-    error.push('This needs to be implemented : do login'); //init setup
-    res.json([{"status" : "error", "error" : error}]);
     //check to see if an email was provided
-      //if email is not valid then update the 
-    //if email is valid check password
-      //if password was not provided then return error
-    //if those two senarious pass then
-        //need to saerch all the users for the email that was applied. Emails should be unique according to the schema.
-        //if found return user
-        //if not found return error
-}
+    if(req.body.email && req.body.password){
+    	//check database for email then compare its passwords
+    	User.findOne(
+    		{'email' : req.body.email},
+    		'name email _id password', //get all items
+    		function(err, user) {
+    			console.log('error ' + err);
+    			console.log('user L ' + user);
+    			if(!err){
+    				if(!user){
+    					error.push('The username with the password you provided did not return a valid user');
+    					res.json(
+				    	[
+				    		{
+				    			"status" : "error", 
+				    			"error" : error
+				    		}
+				    	]);
+    				} else {
+    					if(user.password === req.body.password){ //Match
+    						req.session.user = { // store the user to the session so when the user returns they do not have to log in agaain
+				                "name" : user.name, 
+				                "email": user.email, 
+				                "_id": user._id 
+				            };
+	            			req.session.loggedIn = true; //set login to true. When they log out we set this to false.
+	            			res.json(user); //return the logged in user data
+    					} else {
+    						error.push('The password does not match the username provided')
+
+	    					res.json(
+					    	[
+					    		{
+					    			"status" : "error", 
+					    			"error" : error
+					    		}
+					    	]);
+    					}
+    				}
+    			} else {
+    				error.push('An error occured. Please contact the user administrator');
+    				res.json(
+			    	[
+			    		{
+			    			"status" : "error", 
+			    			"error" : error
+			    		}
+			    	]);
+    			}
+    		}
+    	);
+    } else {
+    	error.push('Email and/or password was not provided');
+    	res.json(
+    	[
+    		{
+    			"status" : "error", 
+    			"error" : error
+    		}
+    	]);
+    };
+};
 
 //----------------------------------------------------------------
 //----Logout User
@@ -42,7 +96,7 @@ exports.doLogin = function(req, res){
 //--------------------------------------------------------------
 exports.doLogOut = function(req, res){
 	//use the req.session.user to set the loggedin to false
-	res.json(["status" : "error", "error" : "This needs to be implemented : log out user"}]);
+	res.json([{"status" : "error", "error" : "This needs to be implemented : log out user"}]);
 }
 
 //----------------------------------------------------------------

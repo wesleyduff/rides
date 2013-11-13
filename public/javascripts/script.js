@@ -18,7 +18,7 @@ angular.module('app', [])
       $http.get('/api/checkLoginStatus').success(callback);
     },
     loginUser : function(_creds, callback){
-      $http.post('/api/login').success(callback);
+      $http.post('/api/login', _creds).success(callback);
     }
   }
 })
@@ -94,14 +94,14 @@ angular.module('app', [])
     //This is not yet implmeent in the backend
     $scope.doLogin = function(){
       var creds = {
-            email: this.email,
-            password: this.password
+            email : this.email,
+            password : this.password
       };
       var jsonCreds = JSON.stringify(creds);
-      var obj = userFactory.loginUser(jsonCreds, function(result){
+      userFactory.loginUser(jsonCreds, function(result){
         if(result.length && result[0].status === "error"){
           var error = result[0].error, //error is an array. ONLY for this response
-              _html;
+              _html = "";
           for(var i = 0; i < error.length; i++){
             if(i === error.length - 1){
               _html += error[i];
@@ -109,8 +109,8 @@ angular.module('app', [])
               _html += error[i] + "<br />";
             }
           }
-          $('.login-error').html(_html);
-          $('.login-error').addClass('.error').show(); //add class .error to show red text. Show the DOM element becuase it is hidden on default
+          $('.login-message').html(_html);
+          $('.login-message').show(); //add class .error to show red text. Show the DOM element becuase it is hidden on default
         } else {
           $('.login-success-view').text('Hello ' + result.name);
           $('.login-success-view').fadeIn();
