@@ -7,7 +7,7 @@ a {
   color: #00B7FF;
 }
 .ride-group {
-	background-color:#3DC8F2;
+	background-color:#7498A3;
 	color: white;
 	border-radius:5px;
 	border-bottom:1px solid white;
@@ -19,7 +19,7 @@ a {
 	border-radius:10px;
 	padding:2px 6px;
 	background-color:white;
-	color:#3DC8F2;
+	color:rgb(182, 6, 20);
 	position:absolute;
 	left:10px;
 }
@@ -40,26 +40,57 @@ a {
 /* *******************
 ** BOOTSTRAP OVERRIDES
 ******************** */
+.hero-unit {
+	background:url('../images/road_bike_photo.jpg') no-repeat 0 -102px;
+	line-height:8px !important;
+}
+.hero-unit h1 {
+	opacity: .5;
+}
+.hero-unit p {
+	color:white;
+	background-color:rgb(182, 6, 20);
+	opacity:.8;
+	padding-top:10px;
+	width:216px;
+	height:14px;
+}
 .text-error {
 	margin:10px 0;
 }
 
+#loginForm .btn {
+	background-image:linear-gradient(to bottom, #791515, #B93636);
+	color:white;
+}
 /* Large desktop */
 @media (min-width: 1200px) {
-	
+	.hero-unit {
+		background:url('../images/road_bike_photo.jpg') no-repeat 0 -102px;
+	}
 }
 
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width:979px){
-	
+	.hero-unit {
+		background:url('../images/road_bike_photo_979.jpg') no-repeat 0 -102px;
+	}
 }
 
 /*landscape phone to portrait tablet */
 @media (max-width: 767px) {
-	
+	.hero-unit {
+		background:url('../images/road_bike_photo_767.jpg') no-repeat -93px 11px;
+	}
 }
 
 /* Landscape phones and down*/
 @media (max-width: 480px) {
-	
-}
+	.hero-unit {
+		background:url('../images/road_bike_photo_480.jpg') no-repeat 0 -10px;
+		padding: 10px 60px 60px 10px !important;
+	}
+	.hero-unit h1 {
+		background-color:white;
+		width:268px;
+	}
