@@ -49,6 +49,7 @@ var rideSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  url: String,
   createdOn: { type: Date, default: Date.now },
   scheduledForDate: {type : Date},
   createdBy : {

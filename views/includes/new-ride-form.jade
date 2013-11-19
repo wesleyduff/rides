@@ -1,0 +1,25 @@
+#new-ride-form.modal.hide.fade(tabindex="-1", role="dialog", aria-labelledby="newRideModalHeader", aria-hidden="true")
+	.modal-header
+		button(type="button", data-dismiss="modal", aria-hidden="true").close x
+		h3#newRideModalHeader Create a New Ride
+	.modal-body
+		form(ng-submit="addNewRide()").form
+			.newRideError.text-error
+				fieldset
+					.form-element
+						select#raceCategory.raceCategory(name="cat", ng-model="cat")
+								option Team Ride
+								option cat 2
+								option cat 3
+								option cat 4
+								option cat 5
+						.form-element
+							input(type="text", ng-model="title", placeholder="Title", required="required")
+						.form-element
+							input(type="text", ng-model="description", placeholder="Description", required="required")
+						.form-element
+							input(type="text", ng-model="rideRoute", placeholder="URL")
+						input(type="hidden", value="{{userId}}", name="userId", ng-model="userId")
+						input(type="submit", value="Add Ride").btn.btn-primary
+	.modal-footer
+		button(data-dismiss="modal", aria-hidden="true").Close

@@ -180,5 +180,5 @@ exports.getRides = function(req, res) {
 //----Create a new Ride
 //--------------------------------------------------------------
 exports.createNewRide = function(req, res){
-    res.json({"status" : "error", "error" : "This needs to be implementd : create New Ride"});
+    res.json([{"status" : "error", "error" : "This needs to be implementd : create New Ride"}]);
 };
