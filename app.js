@@ -47,7 +47,7 @@ app.get('/api/checkLoginStatus', api.checkLoginStatus); //check if user is logge
 app.post('/api/login', api.doLogin); //login user
 app.post('/api/logout', api.doLogOut); //Logout user TODO:// NEEDS TO BE IMPLEMENTED
 //user
-app.post('/api/registerUser', api.registerUser); //Create a new user
+app.post('/api/users', api.registerUser); //Create a new user
 app.get('/api/users', api.getUsers); //get a list of users from the API
 //rides
 app.get('/api/rides', api.getRides); //get a list of rides from the API

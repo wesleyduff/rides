@@ -11,12 +11,6 @@ angular.module('app', ['ngResource'])
     getUser : function(_userId){
       $http.post('/api/user/' + _userId);
     },
-    getUsers : function(callback){
-      $http.get('/api/users').success(callback);
-    },
-    registerUser : function(_jsonUser, callback){
-      $http.post('/api/registerUser', _jsonUser).success(callback);
-    },
     checkForLogedInUser : function(callback){
       $http.get('/api/checkLoginStatus').success(callback);
     },
@@ -82,27 +76,23 @@ angular.module('app', ['ngResource'])
         $('.registerError').text("Please select your race category");
         return;
       }
-      var User = {
-        name : this.name,
-        email : this.email,
-        password : this.password,
-        modifiedOn: Date.now(),
-        lastLogin: Date.now(),
-        cat: this.cat
-      }
-      var jsonUser = JSON.stringify(User);
-      userFactory.registerUser(jsonUser, function(result){ //call factory API to register a new user
-        if(result.length && result[0].status === "error"){
-          $('.registerError').text(result[0].error); //show error that has happened
-        } else {
-          $('#loginForm').remove(); //Hide the login because they do not need it.
-          $('#register-form button.close').click();//close the modal : Find a better way of doing this
-          $scope.userId = result._id;
-          //show logged in user
-          $('.login-success-view').text('Hello ' + result.name);
-          $('.login-success-view').fadeIn();
-        }
+      var user = new userFactoryResponse({
+          name : this.name,
+          email : this.email,
+          password : this.password,
+          modifiedOn: Date.now(),
+          lastLogin: Date.now(),
+          cat: this.cat
       });
+       user.$save(function(_user){
+            console.log('user from $save : ' + user);
+            $('#loginForm').remove(); //Hide the login because they do not need it.
+            $('#register-form button.close').click();//close the modal : Find a better way of doing this
+            $scope.userId = _user._id;
+            //show logged in user
+            $('.login-success-view').text('Hello ' + _user.name);
+            $('.login-success-view').fadeIn();
+       });
     }
 
     //This is not yet implmeent in the backend
