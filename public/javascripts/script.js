@@ -1,8 +1,11 @@
 //Build module
-angular.module('app', [])
+angular.module('app', ['ngResource'])
 /* ***************************************
 **       FACTORIES
 **************************************** */
+.factory('userFactoryResponse', function($resource){
+    return $resource('http://localhost\\:3000/api/users');
+})
 .factory('userFactory', function($http){
   return {
     getUser : function(_userId){
@@ -45,9 +48,19 @@ angular.module('app', [])
 //TODO:
 //Make DRY - refactor
 //--------------------------------------------------------------
-.controller('MainCtrl', ['$scope', '$http', 'userFactory', 'rideFactory', function ($scope, $http, userFactory, rideFactory) {
+.controller('MainCtrl', ['$scope', '$http', 'userFactory', 'rideFactory', 'userFactoryResponse', function ($scope, $http, userFactory, rideFactory, userFactoryResponse) {
     $scope.userId;
     $scope.rides = "Rides"; //doing thi sto make sure angular is working. Remove when tested.
+
+    //Example of using $resource
+    //Remove this
+    $scope.getUsers = function(){
+        userFactoryResponse.query(function(_users){
+            //success
+            console.log(_users)
+        });
+    }
+
     $scope.initPage = function(){
       userFactory.checkForLogedInUser(function(result){
         if(result.length && result[0].status === "success"){

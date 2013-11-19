@@ -103,7 +103,14 @@ exports.doLogOut = function(req, res){
 //----Get All Users
 //----------------------------------------------------------------
 exports.getUsers = function(req, res) {
-    res.json([{"status" : "error", "error" : "This needs to be implementd : get Users"}]);
+    User.find({}, function(err, users){
+        if(!err) {
+            console.log("users returned : " + users);
+            res.json(users);
+        } else {
+            res.json([{"status" : "error", "error" : "The request to find all users failed"}]);
+        }
+    })
 };
 
 
