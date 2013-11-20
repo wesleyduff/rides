@@ -4,18 +4,23 @@ angular.module('app', ['ngResource'])
 **       FACTORIES
 **************************************** */
 .factory('userFactoryResponse', function($resource){
-    return $resource('http://localhost\\:3000/api/users');
+    return $resource('http://localhost\\:3000/api/users',
+        {},
+        {
+            update: {method:'PUT'}
+        }
+    );
 })
 .factory('userFactory', function($http){
   return {
-    getUser : function(_userId){
-      $http.post('/api/user/' + _userId);
-    },
     checkForLogedInUser : function(callback){
       $http.get('/api/checkLoginStatus').success(callback);
     },
     loginUser : function(_creds, callback){
       $http.post('/api/login', _creds).success(callback);
+    },
+    logOut : function(callback){
+        $http.get('/api/logout').success(callback);
     }
   }
 })
@@ -58,15 +63,16 @@ angular.module('app', ['ngResource'])
     $scope.initPage = function(){
       userFactory.checkForLogedInUser(function(result){
         if(result.length && result[0].status === "success"){
-          $('#loginForm').remove(); //Hide the login because they do not need it.
+          $('#loginForm').hide(); //Hide the login because they do not need it.
           //Displaly their name at the top of the page
           $('.login-success-view').text('Hello ' + result[1].name);
-          $('.login-success-view').fadeIn();
+          $('.login-success-view, .logout-view').fadeIn();
           $scope.userId = result[1]._id;
           updateUser = result[1];
           updateUser.lastLogin = Date().now;
-          //TODO: UPDATE user with id 
-          //TODO: Save Updated user back to the DB
+          userFactoryResponse.update({}, updateUser, function(){
+              console.log('user updated');
+          });
         };
       });
     };
@@ -86,7 +92,7 @@ angular.module('app', ['ngResource'])
       });
        user.$save(function(_user){
             console.log('user from $save : ' + user);
-            $('#loginForm').remove(); //Hide the login because they do not need it.
+            $('#loginForm').hide(); //Hide the login because they do not need it.
             $('#register-form button.close').click();//close the modal : Find a better way of doing this
             $scope.userId = _user._id;
             //show logged in user
@@ -97,6 +103,9 @@ angular.module('app', ['ngResource'])
 
     //This is not yet implmeent in the backend
     $scope.doLogin = function(){
+        if($('.login-message:visible').length){
+            $('.login-message:visible').hide().html();
+        }
       var creds = {
             email : this.email,
             password : this.password
@@ -118,12 +127,22 @@ angular.module('app', ['ngResource'])
         } else {
           $scope.userId = result._id;
           $('.login-success-view').text('Hello ' + result.name);
-          $('.login-success-view').fadeIn();
+          $('.login-success-view, .logout-view').fadeIn();
           $('#loginForm').hide(); //Hide the login because they do not need it.
         }
       });
     };
 
+    //Log out a user
+    $scope.logOut = function(){
+        userFactory.logOut(function(result){
+            if(result.status === "success"){
+                $('.login-success-view').text();
+                $('.login-success-view, .logout-view').hide();
+                $('#loginForm').show(); //Hide the login because they do not need it.
+            }
+        });
+    }
     //Add a new ride
     $scope.addNewRide = function(){
       var   _userId = this.userId,

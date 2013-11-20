@@ -23,7 +23,8 @@ html(ng-app="app", lang="en")
 						span.icon-bar
 						span.icon-bar
 					.login-success-view(style="display:none").text-info
-						.not-you
+					a(href="#", ng-click="logOut()", style="display:none").logout-view.text-info
+						| logout
 					a.brand
 						| {{rides}}
 					.nav-collapse.collapse

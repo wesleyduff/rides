@@ -30,32 +30,35 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 
 /* ****************************************
-** CORE ROUTES
-**************************************** */
+ ** CORE ROUTES
+ **************************************** */
 // ROUTES BASIC
 app.get('/', routes.index);
 
 /* ****************************************
-** API ROUTES
-**************************************** */
+ ** API ROUTES
+ **************************************** */
 //login
 app.get('/api/checkLoginStatus', api.checkLoginStatus); //check if user is logged in
 app.post('/api/login', api.doLogin); //login user
-app.post('/api/logout', api.doLogOut); //Logout user TODO:// NEEDS TO BE IMPLEMENTED
+app.get('/api/logout', api.doLogOut); //Logout user TODO:// NEEDS TO BE IMPLEMENTED
 //user
 app.post('/api/users', api.registerUser); //Create a new user
 app.get('/api/users', api.getUsers); //get a list of users from the API
+app.put('/api/users', api.updateUser);
+app.delete('/api/users', api.deleteUser); //delete a user. Deleting a list of users will come later
 //rides
 app.get('/api/rides', api.getRides); //get a list of rides from the API
 app.post('/api/ride/new', api.createNewRide); //Create a new Ride
 
+
 /* ****************************************
-** SET UP SERVER
-**************************************** */
+ ** SET UP SERVER
+ **************************************** */
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port'));
 });

@@ -33,6 +33,11 @@ a {
     right: 100px;
     top: 15px;
 }
+.logout-view {
+    position: absolute;
+    right:50px;
+    top:15px;
+}
 .login-message {
 	margin:10px 0 10px 10px;
 	display:block;
