@@ -1,11 +1,3 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
 .ride-group {
 	background-color:#7498A3;
 	color: white;
@@ -59,7 +51,7 @@ a {
 }
 .hero-unit p {
 	color:white;
-	background-color:rgb(182, 6, 20);
+	background-color:#f5f5;
 	opacity:.8;
 	padding-top:10px;
 	width:216px;
@@ -73,6 +65,10 @@ a {
 	background-image:linear-gradient(to bottom, #791515, #B93636);
 	color:white;
 }
+.dropdown-menu {
+    z-index: 1051;
+}
+
 /* Large desktop */
 @media (min-width: 1200px) {
 	.hero-unit {

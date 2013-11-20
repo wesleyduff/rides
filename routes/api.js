@@ -103,7 +103,14 @@ exports.doLogOut = function(req, res){
 //----Get All Users
 //----------------------------------------------------------------
 exports.getUsers = function(req, res) {
-    res.json([{"status" : "error", "error" : "This needs to be implementd : get Users"}]);
+    User.find({}, function(err, users){
+        if(!err) {
+            console.log("users returned : " + users);
+            res.json(users);
+        } else {
+            res.json([{"status" : "error", "error" : "The request to find all users failed"}]);
+        }
+    });
 };
 
 
@@ -224,13 +231,40 @@ exports.doLogOut = function(req, res){
 //----Get a list of all rides
 //--------------------------------------------------------------
 exports.getRides = function(req, res) {
-    console.log(req.session)
-    res.json({"status" : "error", "error" : "This needs to be implementd : get Rides"});
+    Ride.find({}, function(err, _rides){
+        if(!err) {
+            res.json(_rides);
+        } else {
+            res.json([{"status" : "error", "error" : "The request to find all users failed"}]);
+        }
+    });
 };
 
 //----------------------------------------------------------------
 //----Create a new Ride
 //--------------------------------------------------------------
 exports.createNewRide = function(req, res){
-    res.json([{"status" : "error", "error" : "This needs to be implementd : create New Ride"}]);
+    console.log(req.body.belongsToGroup)
+    Ride.create(
+        {
+            title: req.body.title,
+            description: req.body.description,
+            url: req.body.url,
+            scheduledForDate: req.body.scheduledForDate,
+            createdBy: req.body.userId,
+            belongsToGroup: req.body.cat
+        }, function(err, _ride){
+            if(!err){
+                console.log("Ride created and saved: " + _ride);
+                res.json(_ride);
+            } else {
+                res.json(
+                        {
+                            "status" : "error",
+                            "error" : err
+                        }
+                );
+            }
+        }
+    )
 };

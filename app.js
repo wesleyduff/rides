@@ -53,7 +53,7 @@ app.put('/api/users', api.updateUser);
 app.delete('/api/users', api.deleteUser); //delete a user. Deleting a list of users will come later
 //rides
 app.get('/api/rides', api.getRides); //get a list of rides from the API
-app.post('/api/ride/new', api.createNewRide); //Create a new Ride
+app.post('/api/rides', api.createNewRide); //Create a new Ride
 
 
 /* ****************************************

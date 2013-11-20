@@ -24,6 +24,14 @@ angular.module('app', ['ngResource'])
     }
   }
 })
+.factory('rideFactoryResponse', function($resource){
+    return $resource('http://localhost\\:3000/api/rides',
+        {},
+        {
+            update: {method:'PUT'}
+        }
+    );
+})
 .factory('rideFactory', function($http){
     return {
       getRide : function(_rideId){
@@ -33,7 +41,7 @@ angular.module('app', ['ngResource'])
         $http.get('/api/rides').success(callback);
       },
       saveRide : function(_jsonRide, callback){
-        $http.post('/api/ride/new', _jsonRide).success(callback);
+        $http.post('/api/rides', _jsonRide).success(callback);
       }
     }
 })
@@ -47,7 +55,7 @@ angular.module('app', ['ngResource'])
 //TODO:
 //Make DRY - refactor
 //--------------------------------------------------------------
-.controller('MainCtrl', ['$scope', '$http', 'userFactory', 'rideFactory', 'userFactoryResponse', function ($scope, $http, userFactory, rideFactory, userFactoryResponse) {
+.controller('MainCtrl', ['$scope', '$http', 'userFactory', 'rideFactory', 'userFactoryResponse', 'rideFactoryResponse', function ($scope, $http, userFactory, rideFactory, userFactoryResponse, rideFactoryResponse) {
     $scope.userId;
     $scope.rides = "Rides"; //doing thi sto make sure angular is working. Remove when tested.
 
@@ -145,34 +153,28 @@ angular.module('app', ['ngResource'])
     }
     //Add a new ride
     $scope.addNewRide = function(){
-      var   _userId = this.userId,
-            _scheduledDate = Date.now(),
-            ride =  {
+        var ride = new rideFactoryResponse({
               title: this.title,
               description: this.description,
               url: this.url,
-              scheduledForDate: _scheduledDate,
-              createdBy: _userId,
+              scheduledForDate: this.scheduledForDate,
+              createdBy: this.userId,
               belongsToGroup: this.cat
-            },
-            jsonRide = JSON.stringify(ride);
-        rideFactory.saveRide(jsonRide, function(result){
-            if(result.length && result[0].status === "error"){
-                $('.newRideError').text(result[0].error); //show error that has happened
-            } else {
-                $('#newRideModalHeader').html('<div class="text-info">Ride Saved</div>');
-                setTimeout(function(){
-                   var temp = $('#newRideModalHeader .text-info');
-                   temp.fade(600);
-                   temp.remove();
-                   $('#newRideModalHeader').text('Crete a New Ride');
-                }, 1000);
-            }
         });
-
+        ride.$save(function(_ride){
+            $('#newRideModalHeader').html('<div class="text-info">Ride Saved</div>');
+            setTimeout(function(){
+               var temp = $('#newRideModalHeader .text-info');
+               temp.fade(600);
+               temp.remove();
+               $('#newRideModalHeader').text('Crete a New Ride');
+            }, 1000);
+        });
     };
+}])
+.controller('ridesCtrl', ['$scope', function($scope){
+    $scope.rides;
 }]);
-
 
 /* ***********************
 ** JQUERY Methods -
