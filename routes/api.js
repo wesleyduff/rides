@@ -244,14 +244,14 @@ exports.getRides = function(req, res) {
 //----Create a new Ride
 //--------------------------------------------------------------
 exports.createNewRide = function(req, res){
-    console.log(req.body.belongsToGroup)
+    console.log(req)
     Ride.create(
         {
             title: req.body.title,
             description: req.body.description,
             url: req.body.url,
             scheduledForDate: req.body.scheduledForDate,
-            createdBy: req.body.userId,
+            createdBy: req.body.createdBy,
             belongsToGroup: req.body.cat
         }, function(err, _ride){
             if(!err){

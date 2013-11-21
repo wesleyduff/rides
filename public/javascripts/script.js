@@ -1,8 +1,32 @@
-//Build module
+/* ***************************************
+ **       MODULE
+ **************************************** */
+
+
+//----------------------------------------------------------------
+//----App
+// ------
+//@inject ngResouce
+  // -- angular-resource.js required
+  // -- using ngResource for RESTful calls to api service
+//--------------------------------------------------------------
 angular.module('app', ['ngResource'])
+
+
+
+
 /* ***************************************
 **       FACTORIES
 **************************************** */
+
+//----------------------------------------------------------------
+//----User
+// ------
+//Using $resource
+//ngResource required in model
+//@paramter $resource
+    // -- angular-reource.js required
+//--------------------------------------------------------------
 .factory('userFactoryResponse', function($resource){
     return $resource('http://localhost\\:3000/api/users',
         {},
@@ -11,6 +35,15 @@ angular.module('app', ['ngResource'])
         }
     );
 })
+
+
+//----------------------------------------------------------------
+//----Ride
+// ------
+//Using Custom $http promise calls
+//@parameter $http required
+    // -- part of angular.js
+//--------------------------------------------------------------
 .factory('userFactory', function($http){
   return {
     checkForLogedInUser : function(callback){
@@ -24,6 +57,16 @@ angular.module('app', ['ngResource'])
     }
   }
 })
+
+
+//----------------------------------------------------------------
+//----Ride
+// ------
+//Using $resource
+//ngResource required in model
+//@paramter $resource
+    // -- angular-reource.js required
+//--------------------------------------------------------------
 .factory('rideFactoryResponse', function($resource){
     return $resource('http://localhost\\:3000/api/rides',
         {},
@@ -32,6 +75,15 @@ angular.module('app', ['ngResource'])
         }
     );
 })
+
+
+//----------------------------------------------------------------
+//----Ride
+// ------
+//Using Custom $http promise calls
+//@parameter $http required
+    // -- part of angular.js
+//--------------------------------------------------------------
 .factory('rideFactory', function($http){
     return {
       getRide : function(_rideId){
@@ -45,6 +97,10 @@ angular.module('app', ['ngResource'])
       }
     }
 })
+
+
+
+
 /* ***************************************
 **       CONTROLLERS 
 **************************************** */
@@ -59,8 +115,9 @@ angular.module('app', ['ngResource'])
     $scope.userId;
     $scope.rides = "Rides"; //doing thi sto make sure angular is working. Remove when tested.
 
-    //Example of using $resource
-    //Remove this
+    /* ---------------------------------------------------------
+     ----    Get All Users
+     --------------------------------------------------------- */
     $scope.getUsers = function(){
         userFactoryResponse.query(function(_users){
             //success
@@ -68,6 +125,10 @@ angular.module('app', ['ngResource'])
         });
     }
 
+
+    /* ---------------------------------------------------------
+     ----    init function
+     --------------------------------------------------------- */
     $scope.initPage = function(){
       userFactory.checkForLogedInUser(function(result){
         if(result.length && result[0].status === "success"){
@@ -84,7 +145,11 @@ angular.module('app', ['ngResource'])
         };
       });
     };
-    
+
+
+    /* ---------------------------------------------------------
+    ----    Register User
+    --------------------------------------------------------- */
     $scope.doRegister = function(){ //Register a new user action
       if($('.raceCategory option:selected').index() == 0){
         $('.registerError').text("Please select your race category");
@@ -109,7 +174,10 @@ angular.module('app', ['ngResource'])
        });
     }
 
-    //This is not yet implmeent in the backend
+
+    /* ---------------------------------------------------------
+     ----    Login User
+     --------------------------------------------------------- */
     $scope.doLogin = function(){
         if($('.login-message:visible').length){
             $('.login-message:visible').hide().html();
@@ -141,7 +209,10 @@ angular.module('app', ['ngResource'])
       });
     };
 
-    //Log out a user
+
+    /* ---------------------------------------------------------
+     ----    Logout User
+     --------------------------------------------------------- */
     $scope.logOut = function(){
         userFactory.logOut(function(result){
             if(result.status === "success"){
@@ -151,30 +222,51 @@ angular.module('app', ['ngResource'])
             }
         });
     }
-    //Add a new ride
+
+
+    /* ---------------------------------------------------------
+     ----    Add A New Ride
+     --------------------------------------------------------- */
     $scope.addNewRide = function(){
+        var _scheduledForDate = new Date($('#scheduledFor input').val());
+        console.log(_scheduledForDate);
         var ride = new rideFactoryResponse({
               title: this.title,
               description: this.description,
               url: this.url,
-              scheduledForDate: this.scheduledForDate,
+              scheduledForDate: _scheduledForDate,
               createdBy: this.userId,
-              belongsToGroup: this.cat
+              belongsToGroup: parseInt(this.cat)
         });
-        ride.$save(function(_ride){
+        ride.$save(function(result){
+            console.log(result);
+            if(result.status === "error"){
+                alert('Error creating ride. Contact system admin.');
+                return;
+            }
             $('#newRideModalHeader').html('<div class="text-info">Ride Saved</div>');
             setTimeout(function(){
                var temp = $('#newRideModalHeader .text-info');
-               temp.fade(600);
+               temp.fadeOut();
                temp.remove();
                $('#newRideModalHeader').text('Crete a New Ride');
-            }, 1000);
+            }, 5000);
         });
     };
 }])
+
+
+
+//----------------------------------------------------------------
+//----Ride Controller
+// ------
+//--------------------------------------------------------------
 .controller('ridesCtrl', ['$scope', function($scope){
     $scope.rides;
 }]);
+
+
+
 
 /* ***********************
 ** JQUERY Methods -

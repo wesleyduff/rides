@@ -8,20 +8,20 @@
 				fieldset
 					.form-element
 						select#raceCategory.raceCategory(name="cat", ng-model="cat")
-								option(selected="selected") Team Ride
-								option cat 2
-								option cat 3
-								option cat 4
-								option cat 5
+								option(checked="checked", selected="selected", value="0") Team Ride
+								option(value="2") cat 2
+								option(value="3") cat 3
+								option(value="4") cat 4
+								option(value="5") cat 5
 						.form-element
 							input(type="text", name="title", ng-model="title", placeholder="Title", required="required")
 						.form-element
 							input(type="text", name="description", ng-model="description", placeholder="Description", required="required")
 						.form-element
-							input(type="text", ng-model="rideRoute", name="url", placeholder="URL")
+							input(type="text", ng-model="url", name="url", placeholder="URL")
 						.form-item
-							div(class="input-append date", id="scheduledFor", data-date="12-02-2012", data-date-format="dd-mm-yyyy")
-								input(class="span2", size="16",name="scheduledForDate", type="text", value="12-02-2012")
+							div(class="input-append date", id="scheduledFor", data-date="12-02-2012", data-date-format="yyyy/mm/dd")
+								input(class="span2", size="16", name="scheduledForDate", ng-model="scheduledForDate", type="text", value="12-02-2012")
 								span.add-on
 									i.icon-th
 						input(type="hidden", value="{{userId}}", name="userId", ng-model="userId")

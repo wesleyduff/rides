@@ -35,7 +35,21 @@ process.on('SIGINT', function() {
     process.exit(0);
   });
 });
+/* ********************************************
+ USER SCHEMA
+ ******************************************** */
+var userSchema = new mongoose.Schema({
+    name: {type: String, required: true},
+    email: {type: String, unique:true, required: true},
+    password: {type: String, required: true},
+    createdOn: { type: Date, default: Date.now },
+    modifiedOn: Date,
+    lastLogin: Date,
+    cat: Number
+});
 
+// Build the User model
+mongoose.model( 'User', userSchema );
 
 /* ********************************************
       Ride SCHEMA
@@ -62,19 +76,3 @@ var rideSchema = new mongoose.Schema({
 
 // Build the User model
 mongoose.model( 'Ride', rideSchema );
-
-/* ********************************************
-      USER SCHEMA
-   ******************************************** */
-var userSchema = new mongoose.Schema({
-  name: {type: String, required: true},
-  email: {type: String, unique:true, required: true},
-  password: {type: String, required: true},
-  createdOn: { type: Date, default: Date.now },
-  modifiedOn: Date,
-  lastLogin: Date,
-  cat: Number
-});
-
-// Build the User model
-mongoose.model( 'User', userSchema );
