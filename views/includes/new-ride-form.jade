@@ -7,25 +7,20 @@
 			.newRideError.text-error
 				fieldset
 					.form-element
-						select#raceCategory.raceCategory(name="cat", ng-model="cat")
-								option(checked="checked", selected="selected", value="0") Team Ride
-								option(value="2") cat 2
-								option(value="3") cat 3
-								option(value="4") cat 4
-								option(value="5") cat 5
-						.form-element
-							input(type="text", name="title", ng-model="title", placeholder="Title", required="required")
-						.form-element
-							input(type="text", name="description", ng-model="description", placeholder="Description", required="required")
-						.form-element
-							input(type="text", ng-model="url", name="url", placeholder="URL")
-						.form-item
-							div(class="input-append date", id="scheduledFor", data-date="12-02-2012", data-date-format="yyyy/mm/dd")
-								input(class="span2", size="16", name="scheduledForDate", ng-model="scheduledForDate", type="text", value="12-02-2012")
-								span.add-on
-									i.icon-th
-						input(type="hidden", value="{{userId}}", name="userId", ng-model="userId")
-						input(type="submit", value="Add Ride").btn.btn-primary
+						select(ng-model="group", name="cat", ng-options="g.title for g in allGroups")
+					.form-element
+						input(type="text", name="title", ng-model="title", placeholder="Title", required="required")
+					.form-element
+						input(type="text", name="description", ng-model="description", placeholder="Description", required="required")
+					.form-element
+						input(type="text", ng-model="url", name="url", placeholder="URL")
+					.form-item
+						div(class="input-append date", id="scheduledFor", data-date="12-02-2012", data-date-format="yyyy/mm/dd")
+							input(class="span2", size="16", name="scheduledForDate", ng-model="scheduledForDate", type="text", value="12-02-2012")
+							span.add-on
+								i.icon-th
+					input(type="hidden", value="{{userId}}", name="userId", ng-model="userId")
+					input(type="submit", value="Add Ride").btn.btn-primary
 	.modal-footer
 		button(data-dismiss="modal", aria-hidden="true").Close
 	script()

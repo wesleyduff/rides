@@ -99,6 +99,23 @@ angular.module('app', ['ngResource'])
 })
 
 
+//----------------------------------------------------------------
+//----Group
+// ------
+//Using $resource
+//ngResource required in model
+//@paramter $resource
+    // -- angular-reource.js required
+//--------------------------------------------------------------
+    .factory('groupFactoryResponse', function($resource){
+        return $resource('http://localhost\\:3000/api/groups',
+            {},
+            {
+                update: {method:'PUT'}
+            }
+        );
+    })
+
 
 
 /* ***************************************
@@ -111,8 +128,9 @@ angular.module('app', ['ngResource'])
 //TODO:
 //Make DRY - refactor
 //--------------------------------------------------------------
-.controller('MainCtrl', ['$scope', '$http', 'userFactory', 'rideFactory', 'userFactoryResponse', 'rideFactoryResponse', function ($scope, $http, userFactory, rideFactory, userFactoryResponse, rideFactoryResponse) {
+.controller('MainCtrl', ['$scope', '$http', 'userFactory', 'rideFactory', 'userFactoryResponse', 'rideFactoryResponse', 'groupFactoryResponse', function ($scope, $http, userFactory, rideFactory, userFactoryResponse, rideFactoryResponse, groupFactoryResponse) {
     $scope.userId;
+
     $scope.rides = "Rides"; //doing thi sto make sure angular is working. Remove when tested.
 
     /* ---------------------------------------------------------
@@ -123,8 +141,10 @@ angular.module('app', ['ngResource'])
             //success
             console.log(_users)
         });
-    }
+    };
 
+    $scope.allGroups = groupFactoryResponse.query();
+    $scope.group= $scope.allGroups[0];
 
     /* ---------------------------------------------------------
      ----    init function
@@ -142,6 +162,7 @@ angular.module('app', ['ngResource'])
           userFactoryResponse.update({}, updateUser, function(){
               console.log('user updated');
           });
+
         };
       });
     };
@@ -236,7 +257,7 @@ angular.module('app', ['ngResource'])
               url: this.url,
               scheduledForDate: _scheduledForDate,
               createdBy: this.userId,
-              belongsToGroup: parseInt(this.cat)
+              belongsToGroup: $scope.group._id
         });
         ride.$save(function(result){
             console.log(result);
@@ -251,6 +272,7 @@ angular.module('app', ['ngResource'])
                temp.remove();
                $('#newRideModalHeader').text('Crete a New Ride');
             }, 5000);
+            $scope.allGroups = groupFactoryResponse.query();
         });
     };
 }])
@@ -261,8 +283,20 @@ angular.module('app', ['ngResource'])
 //----Ride Controller
 // ------
 //--------------------------------------------------------------
-.controller('ridesCtrl', ['$scope', function($scope){
-    $scope.rides;
+.controller('ridesCtrl', ['$scope', 'rideFactoryResponse', 'groupFactoryResponse', function($scope, rideFactoryResponse, groupFactoryResponse){
+
+        $scope.allGroups;
+        $scope.group;
+
+        //Initialize the scope for rideCtrl
+        $scope.init = function(){
+            /* ---------------------------------------------------------
+             ----    Get All Groups
+             ---------------------------------------------------------- */
+            $scope.allGroups = groupFactoryResponse.query();
+            $scope.group= $scope.allGroups[0];
+        };
+
 }]);
 
 

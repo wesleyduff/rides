@@ -8,6 +8,7 @@ var db = require('./model/db');
 var routes = require('./routes');
 var ride = require('./routes/ride');
 var user = require('./routes/user');
+var group = require('./routes/group');
 var api = require('./routes/api');
 var http = require('http');
 var path = require('path');
@@ -52,8 +53,11 @@ app.get('/api/users', api.getUsers); //get a list of users from the API
 app.put('/api/users', api.updateUser);
 app.delete('/api/users', api.deleteUser); //delete a user. Deleting a list of users will come later
 //rides
-app.get('/api/rides', api.getRides); //get a list of rides from the API
+app.get('/api/rides/:id', api.getRides); //get a list of rides from the API
 app.post('/api/rides', api.createNewRide); //Create a new Ride
+//groups
+app.get('/api/groups', api.getGroups);
+app.post('/api/groups', api.createGroup);
 
 
 /* ****************************************

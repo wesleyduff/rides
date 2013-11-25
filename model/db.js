@@ -52,27 +52,51 @@ var userSchema = new mongoose.Schema({
 mongoose.model( 'User', userSchema );
 
 /* ********************************************
-      Ride SCHEMA
-   ******************************************** */
+ Ride SCHEMA
+ ******************************************** */
 var rideSchema = new mongoose.Schema({
-  title: {
-    type: String, 
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  url: String,
-  createdOn: { type: Date, default: Date.now },
-  scheduledForDate: {type : Date},
-  createdBy : {
-    type : mongoose.Schema.Types.ObjectId, 
-    ref: 'User',
-    required : true
-  },
-  belongsToGroup : Number
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    url: String,
+    createdOn: { type: Date, default: Date.now },
+    scheduledForDate: {type : Date},
+    belongsToGroup :  {
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'Group',
+        required : true
+    },
+    createdBy : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required : true
+    }
 });
 
 // Build the User model
 mongoose.model( 'Ride', rideSchema );
+
+/* ********************************************
+ Group SCHEMA
+ ******************************************** */
+var groupSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    createdOn: { type: Date, default: Date.now },
+    rides : [rideSchema]
+
+});
+
+// Build the User model
+mongoose.model( 'Group', groupSchema );

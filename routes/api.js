@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User'); //user schema and model created in model/db.js
 var Ride = mongoose.model('Ride'); //ride schema and model created in model/db.js
+var Group = mongoose.model('Group'); //ride schema and model created in model/db.js
 
 
 /* ****************************************
@@ -23,7 +24,6 @@ exports.checkLoginStatus = function(req, res){
 //--------------------------------------------------------------
 exports.doLogin = function(req, res){
 
-    console.log(req.body.email);
     var error = [];
     //check to see if an email was provided
     if(req.body.email && req.body.password){
@@ -90,14 +90,13 @@ exports.doLogin = function(req, res){
 };
 
 //----------------------------------------------------------------
-//----Logout User
-// look at how a user gets registered on how to perform logout tasks
-// use : req.session object
+//----Logout a user
 //--------------------------------------------------------------
 exports.doLogOut = function(req, res){
-    //use the req.session.user to set the loggedin to false
-    res.json([{"status" : "error", "error" : "This needs to be implemented : log out user"}]);
+    req.session.loggedIn = false;
+    res.json({"status": "success", "success" : "Log back in"});
 }
+
 
 //----------------------------------------------------------------
 //----Get All Users
@@ -105,7 +104,6 @@ exports.doLogOut = function(req, res){
 exports.getUsers = function(req, res) {
     User.find({}, function(err, users){
         if(!err) {
-            console.log("users returned : " + users);
             res.json(users);
         } else {
             res.json([{"status" : "error", "error" : "The request to find all users failed"}]);
@@ -128,8 +126,7 @@ exports.registerUser = function(req, res){
             modifiedOn: req.body.modifiedOn,
             lastLogin: req.body.lastLogin
         }, function (err, user){
-            if(err){ // If error then we know the user has not been registered before
-                console.log("error : ==== " + err);
+            if(err){ // If error then we know the user has not been registered before\
                 if (err.code === 11000) { //email has already been taken
                     res.json(
                         [
@@ -172,7 +169,6 @@ exports.registerUser = function(req, res){
 //----Update a current user
 //--------------------------------------------------------------
 exports.updateUser = function(req, res){
-    console.log('req : ' + req.body.password);
     User.findOne({_id: req.body._id}, function(err, _user){
         if(!err){
             console.log('updating user : ' + _user);
@@ -215,27 +211,22 @@ exports.deleteUser = function(req, res){
     res.json({"error" : "this is not yet implemented"});
 };
 
-//----------------------------------------------------------------
-//----Logout a user
-//--------------------------------------------------------------
-exports.doLogOut = function(req, res){
-    req.session.loggedIn = false;
-    res.json({"status": "success", "success" : "Log back in"});
-}
+
 
 /* **********************************
  ** RIDE API CALLS
  ********************************** */
 
 //----------------------------------------------------------------
-//----Get a list of all rides
+//----Get a list of all rides from the provided group
 //--------------------------------------------------------------
 exports.getRides = function(req, res) {
-    Ride.find({}, function(err, _rides){
+    console.log("param id" + req.params.id);
+    Group.findById(req.params.id, 'rides _id', function(err, _group){
         if(!err) {
-            res.json(_rides);
+            res.json(_group.rides);
         } else {
-            res.json([{"status" : "error", "error" : "The request to find all users failed"}]);
+            res.json({"status" : "error", "error" : err});
         }
     });
 };
@@ -244,27 +235,77 @@ exports.getRides = function(req, res) {
 //----Create a new Ride
 //--------------------------------------------------------------
 exports.createNewRide = function(req, res){
-    console.log(req)
-    Ride.create(
+    if(req.body.title && req.body.description){
+        var ride =
         {
             title: req.body.title,
             description: req.body.description,
             url: req.body.url,
             scheduledForDate: req.body.scheduledForDate,
             createdBy: req.body.createdBy,
-            belongsToGroup: req.body.cat
-        }, function(err, _ride){
+            belongsToGroup: req.body.belongsToGroup
+        };
+        //Add ride to group
+        Group.findById(req.body.belongsToGroup, 'rides _id', function(err, _group){
             if(!err){
-                console.log("Ride created and saved: " + _ride);
-                res.json(_ride);
+                _group.rides.push(ride);
+                _group.save(function(err, _groupSaved){
+                    if(!err){
+                        console.log(_groupSaved);
+                        res.json("group saved" + _groupSaved);
+                    } else {
+                        //saving the group failed
+                        console.log(err);
+                        return res.json({"status" : "error", "error" : err});
+                    }
+                });
+            } else {
+                res.json({"status" : "error", "error" : err });
+            }
+        });
+    } else {
+        res.json({"status" : "error", "error" : "Title or description was not provided"});
+    }
+};
+
+
+/* **********************************
+ ** GROUP API CALLS
+ ********************************** */
+
+
+//----------------------------------------------------------------
+//----Create a new Ride
+//--------------------------------------------------------------
+exports.createGroup = function(req, res){
+    console.log(req)
+    Group.create(
+        {
+            title: req.body.title,
+            description: req.body.description,
+            rides : req.body.rides
+        }, function(err, _group){
+            if(!err){
+                console.log("Ride created and saved: " + _group);
+                res.json(_group);
             } else {
                 res.json(
-                        {
-                            "status" : "error",
-                            "error" : err
-                        }
+                    {
+                        "status" : "error",
+                        "error" : err
+                    }
                 );
             }
         }
     )
 };
+
+exports.getGroups = function(req, res){
+    Group.find({}).sort({createdOn: 1}).execFind(function(err, _groups){
+        if(!err) {
+            res.json(_groups);
+        } else {
+            res.json([{"status" : "error", "error" : err}]);
+        }
+    });
+}
