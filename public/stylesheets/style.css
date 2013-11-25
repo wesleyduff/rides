@@ -44,20 +44,20 @@
 /* *******************
 ** BOOTSTRAP OVERRIDES
 ******************** */
-.hero-unit {
+.jumbotron {
 	background:url('../images/road_bike_photo.jpg') no-repeat 0 -102px;
 	line-height:8px !important;
 }
-.hero-unit h1 {
+.jumbotron .container h1 {
 	opacity: .5;
 }
-.hero-unit p {
+.jumbotron .container p {
 	color:white;
-	background-color:#f5f5;
+	background-color:rgb(182, 6, 20);
 	opacity:.8;
 	padding-top:10px;
 	width:216px;
-	height:14px;
+	height:auto;
 }
 .text-error {
 	margin:10px 0;
