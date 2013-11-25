@@ -38,7 +38,9 @@
 /* ******************
 ** Rides Form
 ****************** */
-
+#new-ride-form .input-group {
+    margin-bottom:15px;
+}
 /* *******************
 ** BOOTSTRAP OVERRIDES
 ******************** */

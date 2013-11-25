@@ -1,8 +1,13 @@
 #rides
-	ul
-		li.row.ride-group(ng-repeat="g in allGroups")
-			.span9
-				h3.text-center
-					| {{ g.title }}
-					span.large-badge
-						| {{ g.rides.length }}
+	ul.list-group
+		li.list-group-item(ng-repeat="group in allGroups")
+			h3.text-center
+				| {{ group.title }}
+				span.large-badge
+					| {{ group.rides.length }}
+			div.list-group
+				a.list-group-item(ng-repeat="ride in group.rides")
+					h4.list-group-item-heading
+						| {{ride.title}}
+					p.list-group-item-text
+						| {{ride.description}}

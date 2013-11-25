@@ -1,28 +1,36 @@
-#new-ride-form.modal.hide.fade(tabindex="-1", role="dialog", aria-labelledby="newRideModalHeader", aria-hidden="true")
-	.modal-header
-		button(type="button", data-dismiss="modal", aria-hidden="true").close x
-		h3#newRideModalHeader Create a New Ride
-	.modal-body
-		form(ng-submit="addNewRide()").form
-			.newRideError.text-error
-				fieldset
-					.form-element
-						select(ng-model="group", name="cat", ng-options="g.title for g in allGroups")
-					.form-element
-						input(type="text", name="title", ng-model="title", placeholder="Title", required="required")
-					.form-element
-						input(type="text", name="description", ng-model="description", placeholder="Description", required="required")
-					.form-element
-						input(type="text", ng-model="url", name="url", placeholder="URL")
-					.form-item
-						div(class="input-append date", id="scheduledFor", data-date="12-02-2012", data-date-format="yyyy/mm/dd")
-							input(class="span2", size="16", name="scheduledForDate", ng-model="scheduledForDate", type="text", value="12-02-2012")
-							span.add-on
-								i.icon-th
-					input(type="hidden", value="{{userId}}", name="userId", ng-model="userId")
-					input(type="submit", value="Add Ride").btn.btn-primary
-	.modal-footer
-		button(data-dismiss="modal", aria-hidden="true").Close
+#new-ride-form.modal.fade
+	.modal-dialog
+		.modal-content
+			.modal-header
+				button(type="button", data-dismiss="modal", aria-hidden="true").close &times
+				h4.modal-title#newRideModalHeader Create a New Ride
+			.modal-body
+				form(ng-submit="addNewRide()").form
+					.newRideError.text-error
+						fieldset
+							.input-group.input-group-lg
+								select(ng-model="group", name="cat", ng-options="g.title for g in allGroups").form-control
+							.input-group.input-group-lg
+								.input-group-addon
+									.glyphicon.glyphicon-star
+								input(type="text", name="title", ng-model="title", placeholder="Title", required="required").form-control
+							.input-group.input-group-lg
+								.input-group-addon
+									.glyphicon.glyphicon-star
+								input(type="text", name="description", ng-model="description", placeholder="Description", required="required").form-control
+							.input-group.input-group-lg
+								.input-group-addon
+									.glyphicon.glyphicon-star-empty
+								input(type="text", ng-model="url", name="url", placeholder="URL").form-control
+							.input-group.input-group-lg
+								.input-group-addon
+									.glyphicon.glyphicon-calendar
+								input(type="text", value="12-02-2013", data-format="yyyy/mm/dd")#scheduledFor.form-control
+							input(type="hidden", value="{{userId}}", name="userId", ng-model="userId")
+			.modal-footer
+				button(type="button", data-dismiss="modal").btn.btn-default Close
+				button(type="submit").btn.btn-primary Add Ride
+
 	script()
 		$(function(){
 			var scheduler = $('#scheduledFor').datepicker()

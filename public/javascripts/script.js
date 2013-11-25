@@ -272,7 +272,15 @@ angular.module('app', ['ngResource'])
                temp.remove();
                $('#newRideModalHeader').text('Crete a New Ride');
             }, 5000);
-            $scope.allGroups = groupFactoryResponse.query();
+
+            //update the groups data without making another service call
+            for(var i = 0; i < $scope.allGroups.length; i++){
+                angular.forEach($scope.allGroups[i], function(value, key){
+                    if(key === "_id" && value === result._id){
+                        $scope.allGroups[i].rides.push(ride);
+                    }
+                });
+            }
         });
     };
 }])

@@ -252,7 +252,7 @@ exports.createNewRide = function(req, res){
                 _group.save(function(err, _groupSaved){
                     if(!err){
                         console.log(_groupSaved);
-                        res.json("group saved" + _groupSaved);
+                        res.json(_groupSaved);
                     } else {
                         //saving the group failed
                         console.log(err);
