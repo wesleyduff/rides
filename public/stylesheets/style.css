@@ -9,9 +9,17 @@
 }
 .large-badge {
 	font-weight:bold;
-	color:#F0F0F0;
+	color:#f5f5f5;
 	position:absolute;
-	left:10px;
+	left:-39px;
+    border-radius: 7px;
+    background-color:lightslategray;
+    width:28px;
+    height:24px;
+    text-align:center;
+    padding:3px;
+    top:-1px;
+
 }
 .navbar-form a {
 	margin-left: 10px;
@@ -41,6 +49,38 @@
 #new-ride-form .input-group, #loginForm .input-group{
     margin-bottom:15px;
 }
+
+
+/* ******************
+** ride display
+****************** */
+.rides-list .list-group-item-text {
+    margin-bottom: 18px;
+}
+.rides-list .number-of-riders {
+    margin:0;
+}
+.ride-date {
+    padding:3px;
+    border-right:1px solid white;
+    color:gray;
+}
+
+.ride-date .calendar-date, .ride-date .time-of-day {
+    font-weight:bold;
+    line-height: 18px;
+}
+
+.ride-date .calendar-date .month {
+    font-size:1.2em;
+}
+.ride-date .calendar-date .day {
+    font-size:1.4em;
+}
+
+
+
+
 /* *******************
 ** BOOTSTRAP OVERRIDES
 ******************** */
@@ -91,9 +131,14 @@
 .navbar-default .navbar-brand {
     color: #F5F2F2;
 }
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus{
     color: #f5f5f5;
     background-color: slategray;
+}
+.list-group-item:hover .ride-date, .list-group-item:focus .ride-date{
+    color:white;
 }
 .navbar-collapse {
     background-color: floralwhite;
@@ -113,18 +158,40 @@
 }
 /* // --- Lists -- */
 .list-group-item{
-    background-color:#222;
+    background-color:lightgray;
+    border:none;
+}
+.list-group a {
+    border-bottom: 2px solid white;
+}
+.list-group a:last-child {
     border:none;
 }
 .list-group-item h3 {
-    color:#F0F0F0;
+    color:dimgray;
 }
-.list-group-item .list-group-item {
-    background-color:#F0F0F0;
+a.list-group-item:hover, a.list-group-item:focus, .list-group-item:hover .list-group-item-heading, a.list-group-item:focus .list-group-item-heading {
+    background-color:darkslategray;
+    color:ghostwhite;
 }
 /* // ------ Modals -- */
 .modal-dialog {
     background-color:orange;
+}
+
+/* //---------- Panels -- */
+.panel-title {
+    margin-left:32px;
+    position:relative;
+}
+
+.panel-heading {
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+.panel-title a {
+    font-size:20px;
 }
 
 /* // ------ Angular Classes -- */

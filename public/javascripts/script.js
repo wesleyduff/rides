@@ -151,8 +151,13 @@ angular.module('app', ['ngResource'])
      --------------------------------------------------------- */
     $scope.initPage = function(){
         $scope.allGroups = groupFactoryResponse.query(function(){
+            for(var i = 0; i < $scope.allGroups.length; i++){
+                $scope.allGroups[i].domId = $scope.allGroups[i]._id;
+            }
             $scope.group = $scope.allGroups[0];
         });
+
+
 
       userFactory.checkForLogedInUser(function(result){
         if(result[0].status === "success"){

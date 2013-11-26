@@ -1,13 +1,28 @@
 #rides
-	ul.list-group
-		li.list-group-item(ng-repeat="group in allGroups")
-			h3.text-center
-				| {{ group.title }}
-				span.large-badge
-					| {{ group.rides.length }}
-			div.list-group
-				a.list-group-item(ng-repeat="ride in group.rides", ng-click="manageActiveState($event)")
-					h4.list-group-item-heading
-						| {{ride.title}}
-					p.list-group-item-text
-						| {{ride.description}}
+	.group(ng-repeat="group in allGroups")
+		.panel-group(id="accordion_{{group.domId}}")
+			.panel.panel-default
+				.panel-heading(data-toggle="collapse", data-parent="#accordion_{{group.domId}}", href="#collapse_{{group.domId}}")
+					h2.panel-title
+						a
+							| {{ group.title }}
+						span.large-badge
+							| {{ group.rides.length }}
+				.panel-collapse.collapse(id="collapse_{{group.domId}}")
+					.panel-body
+						div.list-group.rides-list
+							a.list-group-item(ng-repeat="ride in group.rides", ng-click="manageActiveState($event)")
+								.container
+									.row
+										.col-xs-2.text-center.ride-date
+											.calendar-date
+												.week-day TUE
+												.month NOV
+												.day 26
+											.time-of-day 6:00pm
+										.col-xs-10
+											h4.list-group-item-heading
+												| {{ride.title}}
+											p.list-group-item-text
+												| {{ride.description}}
+											p.number-of-riders 2 riders
