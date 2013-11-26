@@ -130,7 +130,7 @@ angular.module('app', ['ngResource'])
 //--------------------------------------------------------------
 .controller('MainCtrl', ['$scope', '$http', 'userFactory', 'rideFactory', 'userFactoryResponse', 'rideFactoryResponse', 'groupFactoryResponse', function ($scope, $http, userFactory, rideFactory, userFactoryResponse, rideFactoryResponse, groupFactoryResponse) {
     $scope.userId;
-
+    $scope.hideLogin = false;
     $scope.rides = "Rides"; //doing thi sto make sure angular is working. Remove when tested.
 
     /* ---------------------------------------------------------
@@ -143,15 +143,19 @@ angular.module('app', ['ngResource'])
         });
     };
 
-    $scope.allGroups = groupFactoryResponse.query();
-    $scope.group= $scope.allGroups[0];
+    $scope.allGroups;
+    $scope.group;
 
     /* ---------------------------------------------------------
      ----    init function
      --------------------------------------------------------- */
     $scope.initPage = function(){
+        $scope.allGroups = groupFactoryResponse.query(function(){
+            $scope.group = $scope.allGroups[0];
+        });
+
       userFactory.checkForLogedInUser(function(result){
-        if(result.length && result[0].status === "success"){
+        if(result[0].status === "success"){
           $('#loginForm').hide(); //Hide the login because they do not need it.
           //Displaly their name at the top of the page
           $('.login-success-view').text('Hello ' + result[1].name);
@@ -162,8 +166,10 @@ angular.module('app', ['ngResource'])
           userFactoryResponse.update({}, updateUser, function(){
               console.log('user updated');
           });
-
-        };
+          $scope.hideLogin = true; //We need to hide the login because we no longer need it displayed
+        } else {
+            $scope.hideLogin = false;
+        }
       });
     };
 
@@ -283,7 +289,13 @@ angular.module('app', ['ngResource'])
             }
         });
     };
+
+     $scope.manageActiveState = function(elem){
+         console.log(angular.element(elem));
+         angular.element('elem').addClass('active');
+     }
 }])
+
 
 
 
@@ -322,7 +334,7 @@ $(function(){
     Close the collapsible nav bar after you select an item from the menu.
     If this is removed then you have to click on the collapse button again to close the collapsible nav bar
      */
-    $('.nav-collapse a').bind('click', function(){
-        $('.btn-navbar').click();
+    $('.navbar-nav a').bind('click', function(){
+        $('.navbar-toggle').click();
     });
 });

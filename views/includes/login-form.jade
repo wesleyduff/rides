@@ -1,7 +1,14 @@
-form(ng-submit="doLogin()").navbar-form.pull-right#loginForm
-	input(type="text", ng-model="email", placeholder="e-mail").span2
-	input(type="password", ng-model="password", placeholder="password").span2
-	input(type="submit", value="Sign in").btn
+form(ng-submit="doLogin()", role="form", ng-hide="{{hideLogin}}").navbar-form#loginForm
+	.input-group
+		.input-group-addon
+			.glyphicon.glyphicon-star
+		input(type="text", ng-model="email", placeholder="e-mail").form-control
+	.input-group
+		.input-group-addon
+			.glyphicon.glyphicon-star
+		input(type="password", ng-model="password", placeholder="password").form-control
+	.input-group
+		input(type="submit", value="Sign in").btn
 	a(href="#register-form", data-toggle="modal") 
 		| Register
 	strong(style="display:none").login-message.text-error

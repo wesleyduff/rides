@@ -6,7 +6,7 @@
 				span.large-badge
 					| {{ group.rides.length }}
 			div.list-group
-				a.list-group-item(ng-repeat="ride in group.rides")
+				a.list-group-item(ng-repeat="ride in group.rides", ng-click="manageActiveState($event)")
 					h4.list-group-item-heading
 						| {{ride.title}}
 					p.list-group-item-text

@@ -8,10 +8,8 @@
 	position:relative;
 }
 .large-badge {
-	border-radius:10px;
-	padding:2px 6px;
-	background-color:white;
-	color:rgb(182, 6, 20);
+	font-weight:bold;
+	color:#F0F0F0;
 	position:absolute;
 	left:10px;
 }
@@ -22,13 +20,15 @@
 }
 .login-success-view {
 	position: absolute;
-    right: 100px;
+    right: 150px;
     top: 15px;
+    color:#242424;
 }
 .logout-view {
     position: absolute;
-    right:50px;
+    right:100px;
     top:15px;
+    color:#242424;
 }
 .login-message {
 	margin:10px 0 10px 10px;
@@ -38,7 +38,7 @@
 /* ******************
 ** Rides Form
 ****************** */
-#new-ride-form .input-group {
+#new-ride-form .input-group, #loginForm .input-group{
     margin-bottom:15px;
 }
 /* *******************
@@ -46,59 +46,122 @@
 ******************** */
 .jumbotron {
 	background:url('../images/road_bike_photo.jpg') no-repeat 0 -102px;
-	line-height:8px !important;
+    line-height: 8px;
 }
 .jumbotron .container h1 {
 	opacity: .5;
+    margin:22px 0 0;
+    padding:0;
 }
 .jumbotron .container p {
-	color:white;
-	background-color:rgb(182, 6, 20);
+	color:#065FA3;
 	opacity:.8;
-	padding-top:10px;
 	width:216px;
 	height:auto;
+    line-height:17px;
 }
 .text-error {
 	margin:10px 0;
 }
 
 #loginForm .btn {
-	background-image:linear-gradient(to bottom, #791515, #B93636);
+    background-color:orangered;
 	color:white;
 }
 .dropdown-menu {
     z-index: 1051;
 }
 
+/* // ------ Navbar */
+.navbar-default {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+    border-color:#686869;
+}
+.navbar-default .navbar-toggle {
+     border-color: lightgray;
+     background-color: darkgray;
+ }
+.navbar-default .navbar-toggle:hover {
+    border-color: lightgray;
+    background-color: darkslategray;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #021C85;
+}
+.navbar-default .navbar-brand {
+    color: #F5F2F2;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    color: #f5f5f5;
+    background-color: slategray;
+}
+.navbar-collapse {
+    background-color: floralwhite;
+}
+.navbar-collapse::-webkit-scrollbar {
+    display:none;
+}
+.navbar-default .navbar-nav>li>a {
+     color: darkslategray;
+ }
+.navbar-default .navbar-nav>li>a:hover {
+    color: darkslategray;
+    background-color: lightgray;
+}
+.navbar-collapse #loginForm {
+    border-top: 1px solid #C8DAE7;
+}
+/* // --- Lists -- */
+.list-group-item{
+    background-color:#222;
+    border:none;
+}
+.list-group-item h3 {
+    color:#F0F0F0;
+}
+.list-group-item .list-group-item {
+    background-color:#F0F0F0;
+}
+/* // ------ Modals -- */
+.modal-dialog {
+    background-color:orange;
+}
+
+/* // ------ Angular Classes -- */
+.hideLogin { display:none; height:0; width:0; }
 /* Large desktop */
 @media (min-width: 1200px) {
-	.hero-unit {
+	.jumbotron {
 		background:url('../images/road_bike_photo.jpg') no-repeat 0 -102px;
 	}
 }
-
+@media (min-width: 980px) and (max-width:1199px){
+    .jumbotron {
+        background:url('../images/road_bike_photo_979.jpg') no-repeat 0 -16px;
+    }
+}
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width:979px){
-	.hero-unit {
-		background:url('../images/road_bike_photo_979.jpg') no-repeat 0 -102px;
+	.jumbotron {
+		background:url('../images/road_bike_photo_979.jpg') no-repeat 0 -22px;
 	}
 }
 
 /*landscape phone to portrait tablet */
 @media (max-width: 767px) {
-	.hero-unit {
+	.jumbotron {
 		background:url('../images/road_bike_photo_767.jpg') no-repeat -93px 11px;
 	}
 }
 
 /* Landscape phones and down*/
 @media (max-width: 480px) {
-	.hero-unit {
-		background:url('../images/road_bike_photo_480.jpg') no-repeat 0 -10px;
-		padding: 10px 60px 60px 10px !important;
+	.jumbotron {
+		background:url('../images/road_bike_photo_480.jpg') no-repeat 0 62px;
+		padding: 34px 60px 9px 10px !important;
 	}
-	.hero-unit h1 {
+	.jumbotron h1 {
 		background-color:white;
 		width:268px;
 	}
+}
