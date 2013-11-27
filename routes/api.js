@@ -221,7 +221,7 @@ exports.deleteUser = function(req, res){
 //----Get a list of all rides from the provided group
 //--------------------------------------------------------------
 exports.getRides = function(req, res) {
-    console.log("param id" + req.params.id);
+    console.log("param id get rides" + req.params.id);
     Group.findById(req.params.id, 'rides _id', function(err, _group){
         if(!err) {
             res.json(_group.rides);
@@ -231,6 +231,11 @@ exports.getRides = function(req, res) {
     });
 };
 
+exports.getRide = function(req, res) {
+
+    res.json({"status" : "error", "error" : "err"});
+
+};
 //----------------------------------------------------------------
 //----Create a new Ride
 //--------------------------------------------------------------
@@ -306,6 +311,16 @@ exports.getGroups = function(req, res){
             res.json(_groups);
         } else {
             res.json([{"status" : "error", "error" : err}]);
+        }
+    });
+}
+
+exports.getGroup = function(req, res){
+    Group.findById(req.params.id, 'rides _id', function(err, _group){
+        if(!err){
+            res.json(_group);
+        } else {
+            res.json({"status" : "error", "error" : err});
         }
     });
 }

@@ -1,0 +1,44 @@
+extends layout
+block content
+	#ridePage.container(ng-controller="rideController", ng-init="initRidePage(\"#{groupId}\", \"#{rideId}\")", page)
+		.row
+			.col-md-12
+				h2 {{ride.title}}
+		.row
+			.col-xs-1
+				.glyphicon.glyphicon-calendar
+			.col-xs-11
+				.today Today
+				.time at 6:00pm
+		.row
+			.col-xs-1
+				.glyphicon.glyphicon-map-marker
+			.col-xs-11
+				.place Walnut Creek
+				.location 1200 W. Parmer, Austin Texas 78660
+		br
+		.row
+			.col-xs-12 {{ride.description}}
+		br
+		.row
+			.col-xs-12
+				.btn.btn-primary RSVP
+		br
+		h3 Riders
+		ul.list-group
+			li.list-group-item
+				.row
+					.col-xs-3
+						.thumbnail
+							img(alt="Place Holder", style="height:50px;padding:0;margin:0;")
+					.col-xs-9
+						strong Paul Richard
+			li.list-group-item
+				.row
+					.col-xs-3
+						.thumbnail
+							img(alt="Place Holder", style="height:50px;padding:0;margin:0;")
+					.col-xs-9
+						strong Todd Harridge
+
+

@@ -11,7 +11,7 @@
 				.panel-collapse.collapse(id="collapse_{{group.domId}}")
 					.panel-body
 						div.list-group.rides-list
-							a.list-group-item(ng-repeat="ride in group.rides", ng-click="manageActiveState($event)")
+							a.list-group-item(ng-repeat="ride in group.rides", ng-click="manageActiveState($event)", ng-href="/ride/{{group.domId}}/{{ride.rideId}}")
 								.container
 									.row
 										.col-xs-2.text-center.ride-date

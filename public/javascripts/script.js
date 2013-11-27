@@ -107,14 +107,25 @@ angular.module('app', ['ngResource'])
 //@paramter $resource
     // -- angular-reource.js required
 //--------------------------------------------------------------
-    .factory('groupFactoryResponse', function($resource){
-        return $resource('http://localhost\\:3000/api/groups',
-            {},
-            {
-                update: {method:'PUT'}
+.factory('groupFactoryResponse', function($resource){
+    return $resource('http://localhost\\:3000/api/groups',
+        {},
+        {
+            update: {method:'PUT'},
+            get : {
+                url : '/groups/:id',
+                params : '@id'
             }
-        );
-    })
+        }
+    );
+})
+.factory('groupFactory', function($http){
+    return {
+       getGroup : function(_groupId, callback){
+            $http.get('/api/groups/' + _groupId).success(callback);
+       }
+    }
+})
 
 
 
@@ -131,7 +142,7 @@ angular.module('app', ['ngResource'])
 .controller('MainCtrl', ['$scope', '$http', 'userFactory', 'rideFactory', 'userFactoryResponse', 'rideFactoryResponse', 'groupFactoryResponse', function ($scope, $http, userFactory, rideFactory, userFactoryResponse, rideFactoryResponse, groupFactoryResponse) {
     $scope.userId;
     $scope.hideLogin = false;
-    $scope.rides = "Rides"; //doing thi sto make sure angular is working. Remove when tested.
+    $scope.PageTitle = "Rides"; //doing thi sto make sure angular is working. Remove when tested.
 
     /* ---------------------------------------------------------
      ----    Get All Users
@@ -153,6 +164,9 @@ angular.module('app', ['ngResource'])
         $scope.allGroups = groupFactoryResponse.query(function(){
             for(var i = 0; i < $scope.allGroups.length; i++){
                 $scope.allGroups[i].domId = $scope.allGroups[i]._id;
+                for(var k = 0; k < $scope.allGroups[i].rides.length; k++){
+                    $scope.allGroups[i].rides[k].rideId = $scope.allGroups[i].rides[k]._id;
+                }
             }
             $scope.group = $scope.allGroups[0];
         });
@@ -308,21 +322,36 @@ angular.module('app', ['ngResource'])
 //----Ride Controller
 // ------
 //--------------------------------------------------------------
-.controller('ridesCtrl', ['$scope', 'rideFactoryResponse', 'groupFactoryResponse', function($scope, rideFactoryResponse, groupFactoryResponse){
-
-        $scope.allGroups;
+.controller('rideController', ['$scope', 'groupFactory', function($scope, groupFactory){
+        $scope.pageTitle = "Back";
+        $scope.ride;
         $scope.group;
-
         //Initialize the scope for rideCtrl
-        $scope.init = function(){
             /* ---------------------------------------------------------
              ----    Get All Groups
              ---------------------------------------------------------- */
-            $scope.allGroups = groupFactoryResponse.query();
-            $scope.group= $scope.allGroups[0];
+        console.log($scope.allGroups.length);
+        $scope.initRidePage = function(groupId, rideId){
+            $scope.group = groupFactory.getGroup(groupId, function(result){
+                for(var i = 0; i < result.rides.length; i++){
+                    console.log(result.rides[i].title);
+                    if(result.rides[i]._id == rideId){
+                        $scope.ride = result.rides[i];
+                    }
+                }
+            });
         };
 
-}]);
+}])
+
+.directive("page", function(){
+    return {
+        restrict: 'A',
+        link: function(scope, elem, attrs){
+            elem.parents('body').find('.navbar-brand').text('Back')
+        }
+    }
+})
 
 
 

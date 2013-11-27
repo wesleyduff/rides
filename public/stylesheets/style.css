@@ -62,7 +62,7 @@
 }
 .ride-date {
     padding:3px;
-    border-right:1px solid white;
+    border-right:1px solid #A57979;
     color:gray;
 }
 
@@ -158,17 +158,21 @@
 }
 /* // --- Lists -- */
 .list-group-item{
-    background-color:lightgray;
+    background-color:#f5f5f5;
     border:none;
 }
 .list-group a {
-    border-bottom: 2px solid white;
-}
-.list-group a:last-child {
-    border:none;
+    border: 1px solid rgb(162, 153, 153)
 }
 .list-group-item h3 {
     color:dimgray;
+}
+#ridePage .list-group-item{
+    background-color: #f5f5f5;
+    border:1px solid lightgray;
+    height:81px;
+    padding:10px;
+    margin:0;
 }
 a.list-group-item:hover, a.list-group-item:focus, .list-group-item:hover .list-group-item-heading, a.list-group-item:focus .list-group-item-heading {
     background-color:darkslategray;
@@ -196,6 +200,23 @@ a.list-group-item:hover, a.list-group-item:focus, .list-group-item:hover .list-g
 
 /* // ------ Angular Classes -- */
 .hideLogin { display:none; height:0; width:0; }
+
+
+/* *******************
+**  RIDE PAGE
+****************** */
+#ridePage {
+    margin-top:46px;
+    padding:20px;
+}
+
+#ridePage .btn-primary {
+    display:block;
+    padding:18px;
+}
+
+
+
 /* Large desktop */
 @media (min-width: 1200px) {
 	.jumbotron {
