@@ -1,4 +1,4 @@
-form(ng-submit="doLogin()", role="form", ng-hide="{{hideLogin}}").navbar-form#loginForm
+form(ng-submit="doLogin()", role="form", ng-show="canShowLogin").navbar-form#loginForm
 	.input-group
 		.input-group-addon
 			.glyphicon.glyphicon-star
