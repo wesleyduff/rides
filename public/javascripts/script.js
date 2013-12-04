@@ -10,31 +10,14 @@
   // -- angular-resource.js required
   // -- using ngResource for RESTful calls to api service
 //--------------------------------------------------------------
-angular.module('app', ['ngResource'])
+var app = angular.module('app', ['ngResource']);
 
-
+angular.module('app')
 
 
 /* ***************************************
 **       FACTORIES
 **************************************** */
-
-//----------------------------------------------------------------
-//----User
-// ------
-//Using $resource
-//ngResource required in model
-//@paramter $resource
-    // -- angular-reource.js required
-//--------------------------------------------------------------
-.factory('userFactoryResponse', function($resource){
-    return $resource('http://localhost\\:3000/api/users',
-        {},
-        {
-            update: {method:'PUT'}
-        }
-    );
-})
 
 
 //----------------------------------------------------------------
@@ -44,19 +27,21 @@ angular.module('app', ['ngResource'])
 //@parameter $http required
     // -- part of angular.js
 //--------------------------------------------------------------
-.factory('userFactory', function($http){
-  return {
-    checkForLogedInUser : function(callback){
-      $http.get('/api/checkLoginStatus').success(callback);
-    },
-    loginUser : function(_creds, callback){
-      $http.post('/api/login', _creds).success(callback);
-    },
-    logOut : function(callback){
-        $http.get('/api/logout').success(callback);
-    }
-  }
-})
+    .factory('userFactory', function ($http) {
+        return {
+            checkForLogedInUser: function (callback) {
+
+                $http.get('/api/checkLoginStatus').success(callback);
+            },
+            loginUser: function (_creds, callback) {
+                $http.post('/api/login', _creds).success(callback);
+            },
+            logOut: function (callback) {
+                $http.get('/api/logout').success(callback);
+            }
+        };
+    })
+
 
 
 //----------------------------------------------------------------
