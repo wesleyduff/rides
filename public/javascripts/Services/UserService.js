@@ -41,8 +41,17 @@ app //Our module. Assigned as a global variable in scripts.js
                 );
                 return deferred.promise;
             },
-            saveUser: function(user){
+            saveUser: function(that){
                 var deferred = $q.defer();
+                var user =
+                    {
+                        "name" : that.name,
+                        "email": that.email,
+                        "password" : that.password,
+                        "modifiedOn" : Date.now(),
+                        "lastLogin" : Date.now(),
+                        "cat" : that.cat
+                    }
                 resource.save(user,
                     function(response){ deferred.resolve(response);}, //single object expected : Not array
                     function(response){ deferred.reject(response);} //single object expected : Not array
