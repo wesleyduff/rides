@@ -134,23 +134,9 @@ exports.saveUser = function(req, res){
         }, function (err, user){
             if(err){ // If error then we know the user has not been registered before\
                 if (err.code === 11000) { //email has already been taken
-                    res.json(
-                        [
-                            {
-                                "status" : "error",
-                                "error" : "User already exists."
-                            }
-                        ]
-                    )
+                    res.json({"status": "error", "error": "User already exists"});
                 } else { //if a general error happens then there is something wrong with the code or the host
-                    res.json(
-                        [
-                            {
-                                "status" : "error",
-                                "error" : "Error adding user: " + req.body.fullName
-                            }
-                        ]
-                    );
+                    res.json(err);
                 }
             } else {
                 //success - add the new user to the DB
@@ -165,9 +151,7 @@ exports.saveUser = function(req, res){
             }
         });
     } else { //they did not provide an email or a password. Send the error the the UI and display
-        res.json([
-            {"status" : "error", "error" : "Password and/or e-mail was not entered"}
-        ]);
+        res.json({"status" : "error", "error" : "Password and/or e-mail was not entered"});
     }
 }
 
