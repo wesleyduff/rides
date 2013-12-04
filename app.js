@@ -47,11 +47,14 @@ app.get('/', routes.index);
 app.get('/api/checkLoginStatus', api.checkLoginStatus); //check if user is logged in
 app.post('/api/login', api.doLogin); //login user
 app.get('/api/logout', api.doLogOut); //Logout user TODO:// NEEDS TO BE IMPLEMENTED
-//user
+//users
 app.post('/api/users', api.registerUser); //Create a new user
 app.get('/api/users', api.getUsers); //get a list of users from the API
 app.put('/api/users', api.updateUser);
 app.delete('/api/users', api.deleteUser); //delete a user. Deleting a list of users will come later
+//user
+app.get('/api/user/:id', api.getUser);
+app.post('/api/user', api.saveUser);
 //rides
 app.get('/api/rides/:rideId/group/:groupId', api.getRide); //get a list of rides from the API
 app.get('/api/rides/:id', api.getRides);

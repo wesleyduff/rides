@@ -124,7 +124,7 @@ angular.module('app')
 //TODO:
 //Make DRY - refactor
 //--------------------------------------------------------------
-.controller('MainCtrl', ['$scope', '$http', 'userFactory', 'rideFactory', 'userFactoryResponse', 'rideFactoryResponse', 'groupFactoryResponse', function ($scope, $http, userFactory, rideFactory, userFactoryResponse, rideFactoryResponse, groupFactoryResponse) {
+.controller('MainCtrlOld', ['$scope', '$http', 'userFactory', 'rideFactory', 'userFactoryResponse', 'rideFactoryResponse', 'groupFactoryResponse', function ($scope, $http, userFactory, rideFactory, userFactoryResponse, rideFactoryResponse, groupFactoryResponse) {
     $scope.userId;
     $scope.hideLogin = false;
     $scope.PageTitle = "Rides"; //doing thi sto make sure angular is working. Remove when tested.
