@@ -11,8 +11,9 @@ app //Our module. Assigned as a global variable in scripts.js
      Binded scope objects
      ng-bind
      */
-    $scope.loggedInUser = null;
-    $scope.allGroups = null;
+    $scope.loggedInUser;
+    $scope.allGroups;
+    $scope.group;
     /* -------------------
      HOOOKS
      ng-show, ng-hide
@@ -25,6 +26,7 @@ app //Our module. Assigned as a global variable in scripts.js
      On load we need to check if the user has been logged in using the session
      */
     $scope.initPage = function(){
+        //check user if they are logged in and give privileges
         userFactoryResponse.checkForLogedInUser()
             .then(function(response){
                 if(response.status){
@@ -33,11 +35,13 @@ app //Our module. Assigned as a global variable in scripts.js
                     $scope.isLoggedIn = false;
                 }
             });
+        //Build the data for our APP
         groupFactoryResponse.getAllGroups()
             .then(function(response){
-               console.log(response);
+                $scope.allGroups = response;
+                $scope.group = $scope.allGroups[0];
             });
-    }
+    };
 
     /* -------------------
     On click event to register a new user.

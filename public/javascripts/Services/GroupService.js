@@ -46,6 +46,13 @@ app //Our module. Assigned as a global variable in scripts.js
                 resource.query(
                     {},
                     function(_groups){
+                        //add domID and RideId to use in the DOM
+                        for(var i = 0; i < _groups.length; i++){
+                            _groups[i].domId = _groups[i]._id;
+                            for(var k = 0; k < _groups[i].rides.length; k++){
+                                _groups[i].rides[k].rideId = _groups[i].rides[k]._id;
+                            }
+                        }
                         deferred.resolve(_groups);
                     },
                     function(response){
