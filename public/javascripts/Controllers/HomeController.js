@@ -11,9 +11,11 @@ app //Our module. Assigned as a global variable in scripts.js
      Binded scope objects
      ng-bind
      */
-    $scope.loggedInUser;
-    $scope.allGroups;
-    $scope.group;
+        $scope.loggedInUser;
+        $scope.allGroups;
+        $scope.group;
+
+
     /* -------------------
      HOOOKS
      ng-show, ng-hide
@@ -21,6 +23,7 @@ app //Our module. Assigned as a global variable in scripts.js
         $scope.canShowLogin = true;
         $scope.canShowLoginSuccessView = false;
         $scope.isLoggedIn = false;
+
 
     /* -------------------
      On load we need to check if the user has been logged in using the session
@@ -35,6 +38,7 @@ app //Our module. Assigned as a global variable in scripts.js
                     $scope.isLoggedIn = false;
                 }
             });
+
         //Build the data for our APP
         groupFactoryResponse.getAllGroups()
             .then(function(response){
@@ -42,6 +46,8 @@ app //Our module. Assigned as a global variable in scripts.js
                 $scope.group = $scope.allGroups[0];
             });
     };
+
+
 
     /* -------------------
     On click event to register a new user.
@@ -58,6 +64,8 @@ app //Our module. Assigned as a global variable in scripts.js
           console.info($scope.registerForm);
       }
     };
+
+
 
     /* -------------------
      Helper functions for DRY

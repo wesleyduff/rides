@@ -1,6 +1,6 @@
 extends layout
 block content
-	#ridePage.container(ng-controller="rideController", ng-init="initRidePage(\"#{groupId}\", \"#{rideId}\")", page)
+	#ridePage.container(ng-controller="RideController", ng-init="initRidePage(\"#{groupId}\", \"#{rideId}\")", page)
 		.row
 			.col-md-12
 				h2 {{ride.title}}

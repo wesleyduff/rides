@@ -31,12 +31,13 @@ app //Our module. Assigned as a global variable in scripts.js
         return {
             getGroup: function(groupId){
                 var deferred = $q.defer();
-                resource.get({id: groupId},
+                resource.get(
+                    {id: groupId},
                     function(_group){
-                        deferred.resolve(_group); //single object expected : Not array
+                        deferred.resolve({status: true, group : _group}); //single object expected : Not array
                     },
                     function(response){
-                        deferred.reject(response); //single object expected : Not array
+                        deferred.reject({status: false, error : response}); //single object expected : Not array
                     }
                 );
                 return deferred.promise;

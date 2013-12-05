@@ -306,6 +306,7 @@ exports.getAllGroups = function(req, res){
 }
 
 exports.getGroup = function(req, res){
+    console.log(req);
     Group.findById(req.params.id, 'rides _id', function(err, _group){
         if(!err){
             res.json(_group);
