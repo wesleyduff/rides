@@ -13,9 +13,9 @@ var Group = mongoose.model('Group'); //ride schema and model created in model/db
 //--------------------------------------------------------------
 exports.checkLoginStatus = function(req, res){
     if(req.session.loggedIn){
-        res.json([{"status" : "success"}, req.session.user]);
+        res.json({"status" : true, "user" : res.session.user});
     } else {
-        res.json([{"status" : false }]);
+        res.json({"status" : false });
     }
 };
 

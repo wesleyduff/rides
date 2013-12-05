@@ -178,32 +178,6 @@ angular.module('app')
     };
 
 
-    /* ---------------------------------------------------------
-    ----    Register User
-    --------------------------------------------------------- */
-    $scope.doRegister = function(){ //Register a new user action
-      if($('.raceCategory option:selected').index() == 0){
-        $('.registerError').text("Please select your race category");
-        return;
-      }
-      var user = new userFactoryResponse({
-          name : this.name,
-          email : this.email,
-          password : this.password,
-          modifiedOn: Date.now(),
-          lastLogin: Date.now(),
-          cat: this.cat
-      });
-       user.$save(function(_user){
-            console.log('user from $save : ' + user);
-            $('#loginForm').hide(); //Hide the login because they do not need it.
-            $('#register-form button.close').click();//close the modal : Find a better way of doing this
-            $scope.userId = _user._id;
-            //show logged in user
-            $('.login-success-view').text('Hello ' + _user.name);
-            $('.login-success-view').fadeIn();
-       });
-    }
 
 
     /* ---------------------------------------------------------

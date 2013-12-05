@@ -29,6 +29,25 @@ app //Our module. Assigned as a global variable in scripts.js
             }
         );
         return {
+            checkForLogedInUser: function(){
+
+                var res = $resource('http://localhost\\:3000/api/checkLoginStatus');
+                var returnObj = {};
+                res.get({},
+                    function(response){
+                        if(response.status){
+                            returnObj.status = true;
+                            returnObj.user = response.user;
+                        } else {
+                            returnObj.status = false;
+                        }
+                    }, function(){
+                        returnObj.status = false;
+                        returnObj.error = "Request Failed";
+                    }
+                );
+                return JSON.stringify(returnObj);
+            },
             getUser: function(userId){
                 var deferred = $q.defer();
                 resource.get({id: userId},
