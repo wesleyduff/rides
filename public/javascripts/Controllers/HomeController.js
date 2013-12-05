@@ -6,12 +6,13 @@ app //Our module. Assigned as a global variable in scripts.js
 // ------
 //--------------------------------------------------------------
 
-.controller('MainCtrl', ['$scope', 'userFactoryResponse', function ($scope, userFactoryResponse) {
+.controller('MainCtrl', ['$scope', 'userFactoryResponse', 'groupFactoryResponse', function ($scope, userFactoryResponse, groupFactoryResponse) {
     /* -------------------
      Binded scope objects
      ng-bind
      */
-    $scope.userName = null;
+    $scope.loggedInUser = null;
+    $scope.allGroups = null;
     /* -------------------
      HOOOKS
      ng-show, ng-hide
@@ -24,32 +25,18 @@ app //Our module. Assigned as a global variable in scripts.js
      On load we need to check if the user has been logged in using the session
      */
     $scope.initPage = function(){
-        var checkForLogin = userFactoryResponse.checkForLogedInUser();
-        if(checkForLogin.status){
-            $scope.isLoggedIn = true;
-            console.log('signed in user');
-            console.log(checkforLogin.user);
-        } else {
-            $scope.isLoggedIn = false;
-            console.log('no user signed in');
-        }
-        /*userFactory.checkForLogedInUser(function(result){
-         if(result[0].status === "success"){
-         $('#loginForm').hide(); //Hide the login because they do not need it.
-         //Displaly their name at the top of the page
-         $('.login-success-view').text('Hello ' + result[1].name);
-         $('.login-success-view, .logout-view').fadeIn();
-         $scope.userId = result[1]._id;
-         updateUser = result[1];
-         updateUser.lastLogin = Date().now;
-         userFactoryResponse.update({}, updateUser, function(){
-         console.log('user updated');
-         });
-         $scope.hideLogin = true; //We need to hide the login because we no longer need it displayed
-         } else {
-         $scope.hideLogin = false;
-         }
-         });*/
+        userFactoryResponse.checkForLogedInUser()
+            .then(function(response){
+                if(response.status){
+                    updateLoginData(response.user);
+                } else {
+                    $scope.isLoggedIn = false;
+                }
+            });
+        groupFactoryResponse.getAllGroups()
+            .then(function(response){
+               console.log(response);
+            });
     }
 
     /* -------------------
@@ -61,14 +48,20 @@ app //Our module. Assigned as a global variable in scripts.js
       if ($scope.registerForm.$dirty && $scope.registerForm.$valid) {
           userFactoryResponse.saveUser(this)
               .then(function(response){
-              $scope.canShowLogin = false;
-              $('#register-form button.close').click();
-              $scope.userName = response.name;
-              $scope.canShowLoginSuccessView = true;
+                  updateLoginData(response);
           });
       } else {
           console.info($scope.registerForm);
       }
     };
 
+    /* -------------------
+     Helper functions for DRY
+    */
+    function updateLoginData(user){
+        $scope.isLoggedIn = true;
+        $scope.canShowLogin = false;
+        $scope.loggedInUser = user;
+        $scope.canShowLoginSuccessView = true;
+    }
 }]);

@@ -12,6 +12,7 @@ html(ng-app="app", lang="en")
 		script(src='/vendor/bootstrap/js/bootstrap.min.js' type='text/javascript')
 		script(src='/javascripts/script.js', type='text/javascript')
 		script(src='/javascripts/Services/UserService.js', type='text/javascript')
+		script(src='/javascripts/Services/GroupService.js', type='text/javascript')
 		script(src='/javascripts/Controllers/HomeController.js', type='text/javascript')
 		script(src='/javascripts/bootstrap-datepicker.js', type='text/javascript')
 		block headjs
@@ -22,7 +23,7 @@ html(ng-app="app", lang="en")
 					span.icon-bar
 					span.icon-bar
 					span.icon-bar
-				.login-success-view(ng-show="canShowLoginSuccessView", ng-bind="userName").text-info
+				.login-success-view(ng-show="canShowLoginSuccessView", ng-bind="loggedInUser.name").text-info
 				a(href="#", ng-click="logOut()", style="display:none").logout-view.text-info
 					| logout
 				a.navbar-brand(href="/")

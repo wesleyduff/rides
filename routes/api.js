@@ -13,7 +13,7 @@ var Group = mongoose.model('Group'); //ride schema and model created in model/db
 //--------------------------------------------------------------
 exports.checkLoginStatus = function(req, res){
     if(req.session.loggedIn){
-        res.json({"status" : true, "user" : res.session.user});
+        res.json({"status" : true, "user" : req.session.user });
     } else {
         res.json({"status" : false });
     }
@@ -152,60 +152,6 @@ exports.saveUser = function(req, res){
         });
     } else { //they did not provide an email or a password. Send the error the the UI and display
         res.json({"status" : "error", "error" : "Password and/or e-mail was not entered"});
-    }
-}
-
-
-//----------------------------------------------------------------
-//----Register a new user
-//--------------------------------------------------------------
-exports.registerUser = function(req, res){
-    //check if email and password was provided
-    if(req.body.email && req.body.password){
-        //Create User and Save to DB
-        User.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            modifiedOn: req.body.modifiedOn,
-            lastLogin: req.body.lastLogin
-        }, function (err, user){
-            if(err){ // If error then we know the user has not been registered before\
-                if (err.code === 11000) { //email has already been taken
-                    res.json(
-                        [
-                            {
-                                "status" : "error",
-                                "error" : "User already exists."
-                            }
-                        ]
-                    )
-                } else { //if a general error happens then there is something wrong with the code or the host
-                    res.json(
-                        [
-                            {
-                                "status" : "error",
-                                "error" : "Error adding user: " + req.body.fullName
-                            }
-                        ]
-                    );
-                }
-            } else {
-                //success - add the new user to the DB
-                console.log("User cretated and savced: " + user);
-                req.session.user = { // store the user to the session so when the user returns they do not have to log in agaain
-                    "name" : user.name,
-                    "email": user.email,
-                    "_id": user._id
-                };
-                req.session.loggedIn = true; //set login to true. When they log out we set this to false.
-                res.json(user); //return the logged in user data
-            }
-        });
-    } else { //they did not provide an email or a password. Send the error the the UI and display
-        res.json([
-            {"status" : "error", "error" : "Password and/or e-mail was not entered"}
-        ]);
     }
 }
 
@@ -349,7 +295,7 @@ exports.createGroup = function(req, res){
     )
 };
 
-exports.getGroups = function(req, res){
+exports.getAllGroups = function(req, res){
     Group.find({}).sort({createdOn: 1}).execFind(function(err, _groups){
         if(!err) {
             res.json(_groups);

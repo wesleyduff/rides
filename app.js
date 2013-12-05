@@ -48,7 +48,7 @@ app.get('/api/checkLoginStatus', api.checkLoginStatus); //check if user is logge
 app.post('/api/login', api.doLogin); //login user
 app.get('/api/logout', api.doLogOut); //Logout user TODO:// NEEDS TO BE IMPLEMENTED
 //users
-app.post('/api/users', api.registerUser); //Create a new user
+app.post('/api/users', api.saveUser); //Create a new user
 app.get('/api/users', api.getUsers); //get a list of users from the API
 app.put('/api/users', api.updateUser);
 app.delete('/api/users', api.deleteUser); //delete a user. Deleting a list of users will come later
@@ -58,11 +58,11 @@ app.post('/api/user', api.saveUser);
 //rides
 app.get('/api/rides/:rideId/group/:groupId', api.getRide); //get a list of rides from the API
 app.get('/api/rides/:id', api.getRides);
-app.post('/api/rides', api.createNewRide); //Create a new Ride
+//app.post('/api/rides', api.createNewRide); //Create a new Ride
 //groups
 app.get('/api/groups/:id', api.getGroup);
-app.get('/api/groups', api.getGroups);
-app.post('/api/groups', api.createGroup);
+app.get('/api/groups', api.getAllGroups);
+//app.post('/api/groups', api.createGroup);
 
 /* ****************************************
  ** RIDE ROUTES
