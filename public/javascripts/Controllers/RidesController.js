@@ -28,17 +28,16 @@ app //Our module. Assigned as a global variable in scripts.js
         $scope.initRidePage = function(groupId, rideId){
             groupFactoryResponse.getGroup(groupId)
                 .then(function(response){
-                    if(response.status){
-                        //success
-                        $scope.group = response.group;
-                        for(var i = 0; i < response.group.rides.length; i++){
-                            console.log(response.group.rides[i].title);
-                            if(response.group.rides[i]._id == rideId){
-                                $scope.ride = response.group.rides[i];
-                            }
+                    console.log(response);
+                    $scope.group = {
+                        id : response.group._id,
+                        rides : response.group.rides
+                    };
+                    for(var i = 0; i < $scope.group.rides.length; i++){
+                        console.log($scope.group.rides[i].title);
+                        if($scope.group.rides[i]._id == rideId){
+                            $scope.ride = $scope.group.rides[i];
                         }
-                    } else {
-                        //failed
                     }
                 });
         };

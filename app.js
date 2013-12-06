@@ -56,11 +56,10 @@ app.delete('/api/users', api.deleteUser); //delete a user. Deleting a list of us
 app.get('/api/user/:id', api.getUser);
 app.post('/api/user', api.saveUser);
 //rides
-app.get('/api/rides/:rideId/group/:groupId', api.getRide); //get a list of rides from the API
 app.get('/api/rides/:id', api.getRides);
 //app.post('/api/rides', api.createNewRide); //Create a new Ride
 //groups
-app.get('/api/groups/:id', api.getGroup);
+app.get('/api/group/:id', api.getGroup);
 app.get('/api/groups', api.getAllGroups);
 //app.post('/api/groups', api.createGroup);
 

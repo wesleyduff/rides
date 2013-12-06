@@ -10,28 +10,18 @@ app //Our module. Assigned as a global variable in scripts.js
     // -- angular-reource.js required
 //--------------------------------------------------------------
     .factory('groupFactoryResponse', function($resource, $q){
-        /*        return $resource('http://localhost\\:3000/api/users',
-         {},
-         {
-         update: {method:'PUT'}
-         }
-         );*/
-        var resource = $resource('http://localhost\\:3000/api/groups',
-            {},
+        var resource = $resource('/api/groups',
             {
                 update: {
                     method:'PUT'
-                },
-                get : {
-                    url : '/api/groups/:id',
-                    params : '@id'
                 }
             }
         );
+        var resource_single =  $resource('/api/group/:id', {id: '@id'});
         return {
             getGroup: function(groupId){
                 var deferred = $q.defer();
-                resource.get(
+                resource_single.get(
                     {id: groupId},
                     function(_group){
                         deferred.resolve({status: true, group : _group}); //single object expected : Not array

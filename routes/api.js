@@ -220,12 +220,6 @@ exports.getRides = function(req, res) {
         }
     });
 };
-
-exports.getRide = function(req, res) {
-
-    res.json({"status" : "error", "error" : "err"});
-
-};
 //----------------------------------------------------------------
 //----Create a new Ride
 //--------------------------------------------------------------
@@ -294,7 +288,15 @@ exports.createGroup = function(req, res){
         }
     )
 };
-
+exports.getGroup = function(req, res){
+    Group.findById(req.params.id, 'rides _id', function(err, _group){
+        if(!err){
+            res.json(_group);
+        } else {
+            res.json({"status" : "error", "error" : err});
+        }
+    });
+};
 exports.getAllGroups = function(req, res){
     Group.find({}).sort({createdOn: 1}).execFind(function(err, _groups){
         if(!err) {
@@ -303,15 +305,5 @@ exports.getAllGroups = function(req, res){
             res.json([{"status" : "error", "error" : err}]);
         }
     });
-}
+};
 
-exports.getGroup = function(req, res){
-    console.log(req);
-    Group.findById(req.params.id, 'rides _id', function(err, _group){
-        if(!err){
-            res.json(_group);
-        } else {
-            res.json({"status" : "error", "error" : err});
-        }
-    });
-}
