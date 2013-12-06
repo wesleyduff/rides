@@ -6,7 +6,7 @@ app //Our module. Assigned as a global variable in scripts.js
 // ------
 //--------------------------------------------------------------
 
-.controller('MainCtrl', ['$scope', 'userFactoryResponse', 'groupFactoryResponse', 'rideFactoryResponse', function ($scope, userFactoryResponse, groupFactoryResponse, rideFactoryResponse) {
+.controller('PageCtrl', ['$scope', 'userFactoryResponse', 'groupFactoryResponse', 'rideFactoryResponse', 'notificationService', function ($scope, userFactoryResponse, groupFactoryResponse, rideFactoryResponse, notificationService) {
     /* -------------------
      Binded scope objects
      ng-bind
@@ -118,9 +118,16 @@ app //Our module. Assigned as a global variable in scripts.js
       var jsonCreds = JSON.stringify(creds);
         userFactoryResponse.loginUser(jsonCreds)
             .then(function(response){
-                console.log('jsonREsponse in then');
-                console.log(response);
-                updateLoginData(response);
+                if(response.$resolved && response.status !== "error"){
+                    console.log("resolved");
+                    console.log(response.$resolved)
+                    updateLoginData(response);
+                } else {
+                    console.log("response");
+                    console.log(response);
+                    notificationService.notification("User does not exist", $('#loginForm'));
+                }
+
             }
         );
     };

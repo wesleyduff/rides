@@ -42,6 +42,15 @@
 	margin:10px 0 10px 10px;
 	display:block;
 }
+/* ******************
+** login Form
+****************** */
+#loginForm .alert{
+    display:table;
+    position:relative;
+    width:100%;
+    text-align: center;
+}
 
 /* ******************
 ** Rides Form
