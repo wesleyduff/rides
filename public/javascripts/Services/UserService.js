@@ -10,13 +10,7 @@ app //Our module. Assigned as a global variable in scripts.js
     // -- angular-reource.js required
 //--------------------------------------------------------------
     .factory('userFactoryResponse', function($resource, $q){
-        /*        return $resource('http://localhost\\:3000/api/users',
-         {},
-         {
-         update: {method:'PUT'}
-         }
-         );*/
-        var resource = $resource('http://localhost\\:3000/api/user',
+        var resource = $resource('/api/user',
             {},
             {
                 update: {
@@ -30,7 +24,7 @@ app //Our module. Assigned as a global variable in scripts.js
         );
         return {
             checkForLogedInUser: function(){
-                var res = $resource('http://localhost\\:3000/api/checkLoginStatus');
+                var res = $resource('/api/checkLoginStatus');
                 var deferred = $q.defer();
                 var returnObj = {};
                 res.get({},
@@ -86,10 +80,4 @@ app //Our module. Assigned as a global variable in scripts.js
             }
 
         }
-//    return $resource('http://localhost\\:3000/api/users',
-//        {},
-//        {
-//            update: {method:'PUT'}
-//        }
-//    );
     })
