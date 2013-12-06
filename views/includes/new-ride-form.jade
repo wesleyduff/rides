@@ -25,11 +25,11 @@
 							.input-group.input-group-lg
 								.input-group-addon
 									.glyphicon.glyphicon-calendar
-								input(type="text", value="12-02-2013", data-format="yyyy/mm/dd")#scheduledFor.form-control
-							input(type="hidden", value="{{userId}}", name="userId", ng-model="userId")
+								input(type="text", value="2013/03/21", data-format="yyyy,mm,dd")#scheduledFor.form-control
+							input(type="hidden", value="{{loggedInUser.id}}", name="userId", ng-model="userId")
+							button(type="submit").btn.btn-primary Add Ride
 			.modal-footer
 				button(type="button", data-dismiss="modal").btn.btn-default Close
-				button(type="submit").btn.btn-primary Add Ride
 
 	script()
 		$(function(){

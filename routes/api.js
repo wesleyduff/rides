@@ -224,6 +224,7 @@ exports.getRides = function(req, res) {
 //----Create a new Ride
 //--------------------------------------------------------------
 exports.createNewRide = function(req, res){
+    console.log(req.body);
     if(req.body.title && req.body.description){
         var ride =
         {
@@ -231,7 +232,7 @@ exports.createNewRide = function(req, res){
             description: req.body.description,
             url: req.body.url,
             scheduledForDate: req.body.scheduledForDate,
-            createdBy: req.body.createdBy,
+            createdBy: req.body.userId,
             belongsToGroup: req.body.belongsToGroup
         };
         //Add ride to group
@@ -262,17 +263,20 @@ exports.createNewRide = function(req, res){
  ** GROUP API CALLS
  ********************************** */
 
+exports.addGroup = function (req, res) {
+    console.log(req.body);
+    res.json({"error": "err"});
+};
 
 //----------------------------------------------------------------
 //----Create a new Ride
 //--------------------------------------------------------------
 exports.createGroup = function(req, res){
-    console.log(req)
+    console.log(req);
     Group.create(
         {
             title: req.body.title,
-            description: req.body.description,
-            rides : req.body.rides
+            description: req.body.description
         }, function(err, _group){
             if(!err){
                 console.log("Ride created and saved: " + _group);

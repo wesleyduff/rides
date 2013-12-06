@@ -1,0 +1,22 @@
+nav.navbar.navbar-default(role="navigation")
+	.navbar-header
+		button(type="button", data-toggle="collapse", data-target="#app-content").navbar-toggle
+			span.icon-bar
+			span.icon-bar
+			span.icon-bar
+		a.navbar-brand(href="/") {{PageTitle}}
+	.collapse.navbar-collapse#app-content
+		ul.nav.navbar-nav
+			li.active
+				a(href="/currentRides")
+					| Current
+			li
+				a(href="/upComingRides")
+					| Upcoming
+			li
+				a(href="/pastRides")
+					| Past
+			li
+				a(href="#new-ride-form", data-toggle="modal")
+					| Add a Ride
+		include login-form.jade
