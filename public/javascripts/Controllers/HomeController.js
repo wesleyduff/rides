@@ -76,8 +76,8 @@ app //Our module. Assigned as a global variable in scripts.js
                  title: this.title,
                  description: this.description,
                  url: this.url,
-                 scheduledForDate: _scheduledForDate,
-                 createdBy: this.userId,
+                 scheduledForDate: Date.now(),
+                 createdBy: $scope.loggedInUser._id,
                  belongsToGroup: $scope.group._id
              });
              ride.$save(function(result){
@@ -106,12 +106,32 @@ app //Our module. Assigned as a global variable in scripts.js
       };
 
 
+    /* ---------------------------------------------------------
+     //     ----    Login User
+     //     --------------------------------------------------------- */
+    $scope.doLogin = function(){
+      var creds = {
+            email : this.email,
+            password : this.password
+      };
+        //TODO: need to set up a failure here and show a message
+      var jsonCreds = JSON.stringify(creds);
+        userFactoryResponse.loginUser(jsonCreds)
+            .then(function(response){
+                console.log('jsonREsponse in then');
+                console.log(response);
+                updateLoginData(response);
+            }
+        );
+    };
+
     /* -------------------
      Helper functions for DRY
     */
     function updateLoginData(user){
         $scope.isLoggedIn = true;
         $scope.canShowLogin = false;
+        user.id = user._id;
         $scope.loggedInUser = user;
         $scope.canShowLoginSuccessView = true;
     }

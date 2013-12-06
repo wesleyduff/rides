@@ -10,7 +10,7 @@ app //Our module. Assigned as a global variable in scripts.js
     // -- angular-reource.js required
 //--------------------------------------------------------------
 .factory('rideFactoryResponse', function($resource){
-    return $resource('http://localhost\\:3000/api/rides',
+    return $resource('/api/rides',
         {},
         {
             update: {method:'PUT'}
