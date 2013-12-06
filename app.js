@@ -61,7 +61,7 @@ app.get('/api/rides/:id', api.getRides);
 //groups
 app.get('/api/group/:id', api.getGroup);
 app.get('/api/groups', api.getAllGroups);
-//app.post('/api/groups', api.createGroup);
+app.post('/api/groups', api.createGroup);
 
 /* ****************************************
  ** RIDE ROUTES

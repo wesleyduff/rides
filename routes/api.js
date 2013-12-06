@@ -267,12 +267,11 @@ exports.createNewRide = function(req, res){
 //----Create a new Ride
 //--------------------------------------------------------------
 exports.createGroup = function(req, res){
-    console.log(req)
+    console.log(req);
     Group.create(
         {
             title: req.body.title,
-            description: req.body.description,
-            rides : req.body.rides
+            description: req.body.description
         }, function(err, _group){
             if(!err){
                 console.log("Ride created and saved: " + _group);
