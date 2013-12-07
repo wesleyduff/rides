@@ -45,7 +45,7 @@
 /* ******************
 ** login Form
 ****************** */
-#loginForm .alert{
+#loginForm .alert, #new-ride-form .alert{
     display:table;
     position:relative;
     width:100%;

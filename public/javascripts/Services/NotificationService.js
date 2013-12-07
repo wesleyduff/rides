@@ -15,19 +15,19 @@ app //Our module. Assigned as a global variable in scripts.js
                 var html;
                 switch(level){
                     case 'success':
-                        html = '<div class="alert alert-success">'+message+'</div>';
+                        html = '<div class="alert alert-success"><strong>'+message+'</strong></div>';
                         break;
                     case 'info' :
-                        html = '<div class="alert alert-info">'+message+'</div>';
+                        html = '<div class="alert alert-info"><strong>'+message+'</strong></div>';
                         break;
                     case 'warning' :
-                        html = '<div class="alert alert-warning">'+message+'</div>';
+                        html = '<div class="alert alert-warning"><strong>'+message+'</strong></div>';
                         break;
                     case 'danger' :
-                        html = '<div class="alert alert-danger">'+message+'</div>';
+                        html = '<div class="alert alert-danger"><strong>'+message+'</strong></div>';
                         break;
                     default :
-                        html = '<div class="alert alert-danger">'+message+'</div>';
+                        html = '<div class="alert alert-danger"><strong>'+message+'</strong></div>';
                         break;
                 }
                 ele.prepend(html);
