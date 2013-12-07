@@ -6,7 +6,7 @@ app //Our module. Assigned as a global variable in scripts.js
 // ------
 //--------------------------------------------------------------
 
-.controller('MainCtrl', ['$scope', 'userFactoryResponse', 'groupFactoryResponse', 'rideFactoryResponse', function ($scope, userFactoryResponse, groupFactoryResponse, rideFactoryResponse) {
+.controller('PageCtrl', ['$scope', 'userFactoryResponse', 'groupFactoryResponse', 'rideFactoryResponse', 'notificationService', function ($scope, userFactoryResponse, groupFactoryResponse, rideFactoryResponse, notificationService) {
     /* -------------------
      Binded scope objects
      ng-bind
@@ -70,39 +70,27 @@ app //Our module. Assigned as a global variable in scripts.js
      On click event to add ride
      */
         $scope.addNewRide = function(){
-             var _scheduledForDate = new Date($('#scheduledFor input').val());
-             console.log(_scheduledForDate);
-             var ride = new rideFactoryResponse({
-                 title: this.title,
-                 description: this.description,
-                 url: this.url,
-                 scheduledForDate: Date.now(),
-                 createdBy: $scope.loggedInUser._id,
-                 belongsToGroup: $scope.group._id
-             });
-             ride.$save(function(result){
-                console.log(result);
-                if(result.status === "error"){
-                    alert('Error creating ride. Contact system admin.');
-                    return;
-                };
-                $('#newRideModalHeader').html('<div class="text-info">Ride Saved</div>');
-                setTimeout(function(){
-                    var temp = $('#newRideModalHeader .text-info');
-                    temp.fadeOut();
-                    temp.remove();
-                    $('#newRideModalHeader').text('Crete a New Ride');
-                }, 5000);
+            var _scheduledForDate = Date($('#scheduledFor').val()),
+                createdBy = $scope.loggedInUser._id,
+                belongsToGroup = $scope.group._id;
 
-                 //update the groups data without making another service call
-                 for(var i = 0; i < $scope.allGroups.length; i++){
-                    angular.forEach($scope.allGroups[i], function(value, key){
-                        if(key === "_id" && value === result._id){
-                            $scope.allGroups[i].rides.push(ride);
-                        }
-                    });
-                 }
-        });
+            rideFactoryResponse.saveRide(this, createdBy, belongsToGroup, _scheduledForDate)
+                .then(function(response){
+                    if(response.status === "error"){
+                        notificationService.notification("User does not exist", $('#new-ride-form form'));
+                        return
+                    };
+                    notificationService.notification("Ride Saved", $('#new-ride-form form'), "info");
+
+                    //update the groups data without making another service call
+                    for(var i = 0; i < $scope.allGroups.length; i++){
+                        angular.forEach($scope.allGroups[i], function(value, key){
+                            if(key === "_id" && value === response.result._id){
+                                $scope.allGroups[i].rides.push(ride);
+                            }
+                        });
+                    }
+                });
       };
 
 
@@ -118,9 +106,11 @@ app //Our module. Assigned as a global variable in scripts.js
       var jsonCreds = JSON.stringify(creds);
         userFactoryResponse.loginUser(jsonCreds)
             .then(function(response){
-                console.log('jsonREsponse in then');
-                console.log(response);
-                updateLoginData(response);
+                if(response.$resolved && response.status !== "error"){
+                    updateLoginData(response);
+                } else {
+                    notificationService.notification("User does not exist", $('#loginForm'));
+                }
             }
         );
     };

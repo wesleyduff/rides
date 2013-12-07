@@ -14,10 +14,13 @@ var app = angular.module('app', ['ngResource']);
 
 angular.module('app')
 
+.controller('MainCtrl', ['$scope', function ($scope) {
+//only global scope elements should go here
+}])
 
-/* ***************************************
-**       FACTORIES
-**************************************** */
+        /* ***************************************
+        **       FACTORIES
+        **************************************** */
 
 
 //----------------------------------------------------------------
@@ -27,7 +30,7 @@ angular.module('app')
 //@parameter $http required
     // -- part of angular.js
 //--------------------------------------------------------------
-    .factory('userFactory', function ($http) {
+/*    .factory('userFactory', function ($http) {
         return {
             checkForLogedInUser: function (callback) {
 
@@ -40,7 +43,7 @@ angular.module('app')
                 $http.get('/api/logout').success(callback);
             }
         };
-    })
+    })*/
 
 
 
@@ -52,14 +55,14 @@ angular.module('app')
 //@paramter $resource
     // -- angular-reource.js required
 //--------------------------------------------------------------
-.factory('rideFactoryResponse', function($resource){
+/*.factory('rideFactoryResponse', function($resource){
     return $resource('http://localhost\\:3000/api/rides',
         {},
         {
             update: {method:'PUT'}
         }
     );
-})
+})*/
 
 
 //----------------------------------------------------------------
@@ -69,7 +72,7 @@ angular.module('app')
 //@parameter $http required
     // -- part of angular.js
 //--------------------------------------------------------------
-.factory('rideFactory', function($http){
+/*.factory('rideFactory', function($http){
     return {
       getRide : function(_rideId){
         $http.post('/api/ride/' + _rideId);
@@ -81,7 +84,7 @@ angular.module('app')
         $http.post('/api/rides', _jsonRide).success(callback);
       }
     }
-})
+})*/
 
 
 //----------------------------------------------------------------
@@ -104,13 +107,13 @@ angular.module('app')
 //        }
 //    );
 //})
-.factory('groupFactory', function($http){
+/*.factory('groupFactory', function($http){
     return {
        getGroup : function(_groupId, callback){
             $http.get('/api/groups/' + _groupId).success(callback);
        }
     }
-})
+})*/
 
 
 

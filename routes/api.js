@@ -37,13 +37,10 @@ exports.doLogin = function(req, res){
                 if(!err){
                     if(!user){
                         error.push('The username with the password you provided did not return a valid user');
-                        res.json(
-                            [
-                                {
+                        res.json({
                                     "status" : "error",
                                     "error" : error
-                                }
-                            ]);
+                                });
                     } else {
                         if(user.password === req.body.password){ //Match
                             req.session.user = { // store the user to the session so when the user returns they do not have to log in agaain
@@ -56,36 +53,28 @@ exports.doLogin = function(req, res){
                         } else {
                             error.push('The password does not match the username provided')
 
-                            res.json(
-                                [
-                                    {
+                            res.json({
                                         "status" : "error",
                                         "error" : error
-                                    }
-                                ]);
+                                    });
                         }
                     }
                 } else {
                     error.push('An error occured. Please contact the user administrator');
                     res.json(
-                        [
                             {
                                 "status" : "error",
                                 "error" : error
-                            }
-                        ]);
+                            });
                 }
             }
         );
     } else {
         error.push('Email and/or password was not provided');
-        res.json(
-            [
-                {
+        res.json({
                     "status" : "error",
                     "error" : error
-                }
-            ]);
+                });
     };
 };
 
