@@ -21,6 +21,9 @@
     top:-1px;
 
 }
+.navbar {
+    margin-bottom:0;
+}
 .navbar-form a {
 	margin-left: 10px;
 	position:relative;
@@ -30,7 +33,7 @@
 	position: absolute;
     right: 150px;
     top: 15px;
-    color:#242424;
+    color:lightgray;
 }
 .logout-view {
     position: absolute;
@@ -96,6 +99,8 @@
 .jumbotron {
 	background:url('../images/road_bike_photo.jpg') no-repeat 0 -102px;
     line-height: 8px;
+    padding-top:0;
+    margin-bottom:0;
 }
 .jumbotron .container h1 {
 	opacity: .5;
@@ -164,6 +169,14 @@
 }
 .navbar-collapse #loginForm {
     border-top: 1px solid #C8DAE7;
+}
+/* // --- Message Center -- */
+.message-center {
+    background-color:darkslategray;
+}
+.message-center .alert{
+    margin:0;
+    text-align: center;
 }
 /* // --- Lists -- */
 .list-group-item{
@@ -254,11 +267,12 @@ a.list-group-item:hover, a.list-group-item:focus, .list-group-item:hover .list-g
 /* Landscape phones and down*/
 @media (max-width: 480px) {
 	.jumbotron {
-		background:url('../images/road_bike_photo_480.jpg') no-repeat 0 62px;
+		background:url('../images/road_bike_photo_480.jpg') no-repeat 0 2px;
 		padding: 34px 60px 9px 10px !important;
 	}
-	.jumbotron h1 {
+	.jumbotron .container h1 {
 		background-color:white;
 		width:268px;
+        margin-top:-22px;
 	}
 }

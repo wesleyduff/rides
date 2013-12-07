@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="797a1762-77b8-4b2b-b913-a91bacc7cda8" name="Default" comment="Adding angular js locally">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/Services/NotificationService.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/Controllers/HomeController.js" afterPath="$PROJECT_DIR$/public/javascripts/Controllers/HomeController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/Services/RideService.js" afterPath="$PROJECT_DIR$/public/javascripts/Services/RideService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/api.js" afterPath="$PROJECT_DIR$/routes/api.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layout.jade" afterPath="$PROJECT_DIR$/views/layout.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/includes/new-ride-form.jade" afterPath="$PROJECT_DIR$/views/includes/new-ride-form.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/script.js" afterPath="$PROJECT_DIR$/public/javascripts/script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/Services/UserService.js" afterPath="$PROJECT_DIR$/public/javascripts/Services/UserService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/includes/header.jade" afterPath="$PROJECT_DIR$/views/includes/header.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/includes/register-form.jade" afterPath="$PROJECT_DIR$/views/includes/register-form.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/style.css" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -37,25 +33,16 @@
       <file leaf-file-name="HomeController.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/Controllers/HomeController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="0" selection-start="2037" selection-end="2037" vertical-scroll-proportion="0.0" vertical-offset="1005" max-vertical-offset="1995">
+            <state line="125" column="105" selection-start="4529" selection-end="4529" vertical-scroll-proportion="0.0" vertical-offset="2244" max-vertical-offset="3040">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="style.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="21" selection-start="943" selection-end="943" vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="4035">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+            <state line="178" column="23" selection-start="3416" selection-end="3416" vertical-scroll-proportion="0.82306165" vertical-offset="3146" max-vertical-offset="5660">
               <folding />
             </state>
           </provider>
@@ -64,25 +51,7 @@
       <file leaf-file-name="NotificationService.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/Services/NotificationService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="40" selection-start="1645" selection-end="1645" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="960">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="api.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/routes/api.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="46" selection-start="1408" selection-end="1408" vertical-scroll-proportion="0.31085715" vertical-offset="428" max-vertical-offset="6160">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GroupService.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/Services/GroupService.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="42" selection-start="699" selection-end="725" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="945">
+            <state line="36" column="40" selection-start="1645" selection-end="1645" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="960">
               <folding />
             </state>
           </provider>
@@ -106,9 +75,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/views/includes/login-form.jade" />
-        <option value="$PROJECT_DIR$/public/javascripts/Services/UserService.js" />
-        <option value="$PROJECT_DIR$/views/ride.jade" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/public/javascripts/Controllers/RidesController.js" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -119,8 +85,11 @@
         <option value="$PROJECT_DIR$/public/javascripts/Services/GroupService.js" />
         <option value="$PROJECT_DIR$/views/includes/new-ride-form.jade" />
         <option value="$PROJECT_DIR$/public/javascripts/Services/RideService.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/Controllers/HomeController.js" />
         <option value="$PROJECT_DIR$/public/javascripts/Services/NotificationService.js" />
+        <option value="$PROJECT_DIR$/views/includes/register-form.jade" />
+        <option value="$PROJECT_DIR$/public/javascripts/Services/UserService.js" />
+        <option value="$PROJECT_DIR$/views/includes/header.jade" />
+        <option value="$PROJECT_DIR$/public/javascripts/Controllers/HomeController.js" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
       </list>
     </option>
@@ -128,7 +97,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
     <option name="y" value="24" />
-    <option name="width" value="1855" />
+    <option name="width" value="1851" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -200,6 +169,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="includes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rides_mobile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rides" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="routes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -215,6 +202,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rides_mobile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rides" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -258,6 +263,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rides_mobile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rides" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -267,7 +294,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea/workspace.xml" />
+    <property name="last_opened_file_path" value="/usr/local/bin/node" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -319,7 +346,7 @@
       <browser start="false" url="" with-js-debugger="false" />
       <method />
     </configuration>
-    <configuration default="false" name="node" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="C:/Program Files (x86)/nodejs/node" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
+    <configuration default="false" name="node" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="/usr/local/bin/node" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
       <browser start="false" url="" with-js-debugger="false" />
       <RunnerSettings RunnerId="NodeJS.debug" />
       <RunnerSettings RunnerId="NodeJS.run" />
@@ -378,18 +405,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1855" height="1050" extended-state="0" />
+    <frame x="65" y="24" width="1851" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23469388" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12021858" sideWeight="0.6904762" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39909297" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20920044" sideWeight="0.6019956" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39800444" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879817" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3085221" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.308204" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -433,90 +460,20 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/api.js</url>
-          <line>30</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/routes/ride.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="15" selection-start="80" selection-end="87" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="400" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="38" selection-start="1907" selection-end="1915" vertical-scroll-proportion="0.81113803" vertical-offset="1190" max-vertical-offset="2025">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/ride.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="13" selection-start="28" selection-end="28" vertical-scroll-proportion="0.0" vertical-offset="25" max-vertical-offset="1250" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="1936" selection-end="1936" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="11950" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/Controllers/RidesController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="595" selection-end="595" vertical-scroll-proportion="1.0396975" vertical-offset="0" max-vertical-offset="1250" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/Services/UserService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="42" selection-start="607" selection-end="607" vertical-scroll-proportion="-0.12693499" vertical-offset="557" max-vertical-offset="2675" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layout.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="36" selection-start="1473" selection-end="1473" vertical-scroll-proportion="1.0064412" vertical-offset="0" max-vertical-offset="825">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="265" column="0" selection-start="8950" selection-end="8950" vertical-scroll-proportion="1.5417956" vertical-offset="5579" max-vertical-offset="7200">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/includes/new-ride-form.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="34" selection-start="296" selection-end="296" vertical-scroll-proportion="0.36036035" vertical-offset="0" max-vertical-offset="1150" />
+        <state line="8" column="34" selection-start="296" selection-end="296" vertical-scroll-proportion="0.36036035" vertical-offset="0" max-vertical-offset="1150">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/Services/GroupService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="42" selection-start="699" selection-end="725" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="1575">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/Services/RideService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="14" selection-start="1225" selection-end="1225" vertical-scroll-proportion="1.2155173" vertical-offset="220" max-vertical-offset="1175" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/Controllers/HomeController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="0" selection-start="2037" selection-end="2037" vertical-scroll-proportion="0.0" vertical-offset="1005" max-vertical-offset="1995">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="21" selection-start="943" selection-end="943" vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="4035">
           <folding />
         </state>
       </provider>
@@ -528,6 +485,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/Services/RideService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="47" selection-start="918" selection-end="918" vertical-scroll-proportion="0.9045226" vertical-offset="0" max-vertical-offset="940">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/includes/register-form.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="38" selection-start="468" selection-end="468" vertical-scroll-proportion="0.610998" vertical-offset="0" max-vertical-offset="800">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/mongoose/lib/model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1047" column="0" selection-start="25485" selection-end="25485" vertical-scroll-proportion="0.33200794" vertical-offset="20733" max-vertical-offset="36520">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="35" selection-start="1337" selection-end="1345" vertical-scroll-proportion="0.33197555" vertical-offset="797" max-vertical-offset="1620">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="265" column="0" selection-start="8950" selection-end="8950" vertical-scroll-proportion="9.323644" vertical-offset="449" max-vertical-offset="5760">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/Services/UserService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="22" selection-start="1358" selection-end="1368" vertical-scroll-proportion="0.49612403" vertical-offset="604" max-vertical-offset="2400">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layout.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="13" selection-start="1316" selection-end="1320" vertical-scroll-proportion="0.6700611" vertical-offset="111" max-vertical-offset="660">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/includes/login-form.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="516">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="30" selection-start="1465" selection-end="1465" vertical-scroll-proportion="0.0" vertical-offset="433" max-vertical-offset="6160">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/includes/header.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="694" selection-end="709" vertical-scroll-proportion="-15.64" vertical-offset="109" max-vertical-offset="620">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/Controllers/HomeController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="125" column="105" selection-start="4529" selection-end="4529" vertical-scroll-proportion="0.0" vertical-offset="2244" max-vertical-offset="3040">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/Services/NotificationService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="40" selection-start="1645" selection-end="1645" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="960">
@@ -535,9 +569,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.js">
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="46" selection-start="1408" selection-end="1408" vertical-scroll-proportion="0.31085715" vertical-offset="428" max-vertical-offset="6160">
+        <state line="178" column="23" selection-start="3416" selection-end="3416" vertical-scroll-proportion="0.82306165" vertical-offset="3146" max-vertical-offset="5660">
           <folding />
         </state>
       </provider>

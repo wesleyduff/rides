@@ -41,6 +41,19 @@ app //Our module. Assigned as a global variable in scripts.js
                 return deferred.promise;
 
             },
+            logOutUser: function(){
+                var deferred = $q.defer();
+                $resource('/api/logout').get(
+                    {},
+                    function(result){
+                        deferred.resolve(result);
+                    },
+                    function(response){
+                        deferred.reject(response);
+                    }
+                );
+                return deferred.promise;
+            },
             checkForLogedInUser: function(){
                 var res = $resource('/api/checkLoginStatus');
                 var deferred = $q.defer();

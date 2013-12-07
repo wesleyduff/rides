@@ -115,6 +115,25 @@ app //Our module. Assigned as a global variable in scripts.js
         );
     };
 
+     /* -------------------------------------------------------
+     // ----    Logout User
+      ---------------------------------------------------- -**/
+     $scope.doLogOut = function(){
+         userFactoryResponse.logOutUser()
+             .then(function(response){
+                if(response.$resolved && response.status !== "error"){
+                    //successs
+                    notificationService.notification("Logout Successfull", $('.message-center'), "success");
+                    $scope.isLoggedIn = false;
+                    $scope.canShowLogin = true;
+                    $scope.loggedInUser = null;
+                    $scope.canShowLoginSuccessView = false;
+                } else {
+                    notificationService.notification("Logout Uncessesful", $('.message-center')); //dange is the default alert style
+                }
+             });
+     }
+
     /* -------------------
      Helper functions for DRY
     */
