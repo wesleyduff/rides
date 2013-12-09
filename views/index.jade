@@ -1,6 +1,6 @@
 extends layout
 block content
-	#mainPage
+	#mainPage(ng-controller="PageCtrl", ng-init="initPage()")
 		.jumbotron
 			.container
 				h1 Ride List

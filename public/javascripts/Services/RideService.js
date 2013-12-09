@@ -17,6 +17,20 @@ app //Our module. Assigned as a global variable in scripts.js
         }
     );
     return {
+        getRideCreator : function(_userId){
+            var deferred = $q.defer();
+            var _resource = $resource('/api/user/:id');
+            _resource.get(
+                {id:_userId},
+                function(result){
+                    deferred.resolve({status:"success", result : result});
+                },
+                function(response){
+                    deferred.reject({status:"error", result :response});
+                }
+            );
+            return deferred.promise;
+        },
         saveRide: function(that, _createdBy, _belongsToGroup, _scheduledForDate){
             var deferred = $q.defer();
             var ride = new resource({
@@ -32,8 +46,8 @@ app //Our module. Assigned as a global variable in scripts.js
                 function(result){
                     deferred.resolve({status:"success", result : result});
                 },
-                function(result){
-                    deferred.reject({status:"error", result :result});
+                function(response){
+                    deferred.reject({status:"error", result :response});
                 }
             );
             return deferred.promise;

@@ -6,7 +6,7 @@ app //Our module. Assigned as a global variable in scripts.js
 // ------
 //--------------------------------------------------------------
 
-    .controller('RideController', ['$scope', 'groupFactoryResponse', function ($scope, groupFactoryResponse) {
+    .controller('RideController', ['$scope', 'groupFactoryResponse', 'rideFactoryResponse', function ($scope, groupFactoryResponse, rideFactoryResponse) {
         /* -------------------
          Binded scope objects
          ng-bind
@@ -14,6 +14,7 @@ app //Our module. Assigned as a global variable in scripts.js
         $scope.pageTitle = "Back";
         $scope.ride;
         $scope.group;
+        $scope.createdUser;
 
 
         /* -------------------
@@ -38,8 +39,19 @@ app //Our module. Assigned as a global variable in scripts.js
                         if($scope.group.rides[i]._id == rideId){
                             $scope.ride = $scope.group.rides[i];
                         }
-                    }
+                    };
+
+                    rideFactoryResponse.getRideCreator($scope.ride.createdBy)
+                        .then(function(response){
+                            if(response.status === "success"){
+                                console.log("user");
+                                console.log(response);
+                                $scope.createdUser = response.result;
+                            }
+                        });
+
                 });
+
         };
 
     }]);
