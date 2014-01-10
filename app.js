@@ -58,6 +58,9 @@ app.post('/api/user', api.saveUser);
 //rides
 app.get('/api/rides/:id', api.getRides);
 app.post('/api/rides', api.createNewRide); //Create a new Ride
+app.post('/api/saveRider', api.addRider); //Add a rider to a ride
+app.post('/api/removeRSVPRider', api.removeRSVPRider); //Remove a rider from a ride
+app.get('/api/group/:groupid/ride/:rideid/getRsvpRiders', api.getRiders); //get all the RSVP riders for a ride
 //groups
 app.get('/api/group/:id', api.getGroup);
 app.get('/api/groups', api.getAllGroups);

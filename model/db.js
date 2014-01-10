@@ -41,7 +41,7 @@ process.on('SIGINT', function() {
 var userSchema = new mongoose.Schema({
     name: {type: String, required: true},
     email: {type: String, unique:true, required: true},
-    password: {type: String, required: true},
+    password: {type: String},
     createdOn: { type: Date, default: Date.now },
     modifiedOn: Date,
     lastLogin: Date,
@@ -74,7 +74,13 @@ var rideSchema = new mongoose.Schema({
     createdBy : {
         type : mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    riders : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
+
+
 });
 
 // Build the User model
@@ -99,3 +105,25 @@ var groupSchema = new mongoose.Schema({
 
 // Build the User model
 mongoose.model( 'Group', groupSchema );
+
+/* ********************************************
+ ridersComment SCHEMA
+ ******************************************** */
+var ridersCommentSchema = new mongoose.Schema({
+    Comment: {
+        type: String,
+        required: true
+    },
+    rider: {
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    ride: {
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'Ride'
+    }
+
+});
+
+// Build the User model
+mongoose.model( 'RidersComment', ridersCommentSchema );

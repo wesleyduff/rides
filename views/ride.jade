@@ -24,25 +24,21 @@ block content
 			.col-xs-12
 				| created by: {{createdUser.name}}
 		br
-		.row
+		.row(ng-hide="showRsvp")
 			.col-xs-12
-				.btn.btn-primary RSVP
+				.btn.btn-danger(ng-click="removeRSVPRider()") un-RSVP
+		.row(ng-show="showRsvp")
+			.col-xs-12
+				.btn.btn-primary(ng-click="addRider()") RSVP
 		br
 		h3 Riders
 		ul.list-group
-			li.list-group-item
+			li.list-group-item(ng-repeat="rider in ridersAttending")
 				.row
 					.col-xs-3
 						.thumbnail
 							img(alt="Place Holder", style="height:50px;padding:0;margin:0;")
 					.col-xs-9
-						strong Paul Richard
-			li.list-group-item
-				.row
-					.col-xs-3
-						.thumbnail
-							img(alt="Place Holder", style="height:50px;padding:0;margin:0;")
-					.col-xs-9
-						strong Todd Harridge
+						strong {{rider.name}}
 
 

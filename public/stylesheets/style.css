@@ -232,7 +232,7 @@ a.list-group-item:hover, a.list-group-item:focus, .list-group-item:hover .list-g
     padding:20px;
 }
 
-#ridePage .btn-primary {
+#ridePage .btn-primary, #ridePage .btn-danger {
     display:block;
     padding:18px;
 }

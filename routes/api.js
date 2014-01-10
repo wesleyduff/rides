@@ -210,6 +210,137 @@ exports.getRides = function(req, res) {
     });
 };
 //----------------------------------------------------------------
+//----Get all the RSVPed riders for a specific ride
+//--------------------------------------------------------------
+exports.getRiders = function(req, res){
+    Group
+        .findById(req.params.groupid, 'rides')
+        .populate('rides.riders', 'id name')
+        .exec( function(err, _group){
+            if(!err){
+                var returnRidersObject = {riders : []};
+                var _selectedRide = _group.rides.id(req.params.rideid);
+                _selectedRide.riders.forEach(function(_riderInQuestion){ //loop through the current riders list and make sure we are not adding a duplicate. This should take place on the UI side, but here too for good measure.
+                    returnRidersObject.riders.push({id : _riderInQuestion._id.toString(), name : _riderInQuestion.name});
+                });
+                return res.json({"status":"succcess", "result":returnRidersObject});
+            } else {
+                return res.json({"status":"error", "error":"Get Riders has failed"})
+            }
+        });
+
+};
+//---------------------------------------------------------------
+//----Remove User for Ride
+//---------------------------------------------------------------
+exports.removeRSVPRider = function(req, res){
+    if(req.body.ride && req.body.rider){
+        Group
+            .findById(req.body.ride.belongsToGroup, 'rides')
+            .populate('rides.riders', 'id name')
+            .exec( function(err, _group){
+                if(!err){
+                    /*
+                     SCOPPED VARIABLES
+                     -
+                     */
+                    var returnRidersObject = { riders : []}; //This object will be returned in the response json and will hold the riders name and id
+                    var _selectedRide = _group.rides.id(req.body.ride._id); //select the ride we are wanted to add riders to
+
+                    _selectedRide.riders.forEach(function(_riderInQuestion){
+                        if(_riderInQuestion._id.toString() !== req.body.rider._id){
+                            returnRidersObject.riders.push({id : _riderInQuestion._id.toString(), name : _riderInQuestion.name});
+                        }
+                    });
+
+                    _selectedRide.riders = returnRidersObject.riders;
+
+                    //update the riders array inside the the specific ride in our group.
+                    _group.rides.id(req.body.ride._id).set('riders', _selectedRide.riders);
+
+                    //save group
+                    _group.save(function(err, _groupSaved){
+                        if(!err){
+                            return res.json({"status" : "success" , result : returnRidersObject});
+                        } else {
+                            return res.json({"status" : "error", "error": err});
+                        }
+                    });
+
+                } else {
+                    return res.json({"status" : "error" , "error" : err});
+                }
+            });
+    } else {
+        return res.json({"status" : "error", "error" : "Ride and Rider was not provided"});
+    }
+}
+
+
+//----------------------------------------------------------------
+//----Add User to Ride
+//--------------------------------------------------------------
+exports.addRider = function(req, res){
+    if(req.body.ride && req.body.rider){
+
+        //Add ride to group
+        Group
+            .findById(req.body.ride.belongsToGroup, 'rides')
+            .populate('rides.riders', 'id name')
+            .exec( function(err, _group){
+                if(!err){
+                    /*
+                    SCOPPED VARIABLES
+                    -
+                     */
+                    var returnRidersObject = { riders : []}; //This object will be returned in the response json and will hold the riders name and id
+                    var riderFound = false; //if the rider is found then return only the array of rsvp'ed riders
+                    var _selectedRide = _group.rides.id(req.body.ride._id); //select the ride we are wanted to add riders to
+
+
+
+                    //Check to see if the logged in user is already registered for this ride.
+                    _selectedRide.riders.forEach(function(_riderInQuestion){ //loop through the current riders list and make sure we are not adding a duplicate. This should take place on the UI side, but here too for good measure.
+                        if(_riderInQuestion._id.toString() === req.body.rider._id){ //check id's as string and compare the two. Maybe find an equals method to compare the two
+                            riderFound = true;
+                        }
+                        returnRidersObject.riders.push({id : _riderInQuestion._id.toString(), name : _riderInQuestion.name});
+                    });
+
+                    //if the rider is found return the json w/ error
+                    if(riderFound){
+                      return res.json({"status" : "error", "error" : "User has already registerd. Would you like to unregister for this ride?"})
+                    }
+
+                    //add the current user to the RSVP list
+                    returnRidersObject.riders.push({id : req.body.rider._id.toString(), name: req.body.rider.name}); //we need the id to be a sting so we can use it in our views
+
+
+                    //save the current logged in user to the rides riders array
+                    _selectedRide.riders.push(req.body.rider._id);
+
+                    //update the riders array inside the the specific ride in our group.
+                    _group.rides.id(req.body.ride._id).set('riders', _selectedRide.riders);
+
+                    //save group
+                    _group.save(function(err, _groupSaved){
+                        if(!err){
+                            return res.json({"status" : "success" , result : returnRidersObject});
+                        } else {
+                            return res.json({"status" : "error", "error": err});
+                        }
+                    });
+                } else {
+                    return res.json({"status" : "error" , "error" : err});
+                }
+
+            });
+    } else {
+        return res.json({"status" : "error", "error" : "Data was not provided"});
+    }
+};
+
+//----------------------------------------------------------------
 //----Create a new Ride
 //--------------------------------------------------------------
 exports.createNewRide = function(req, res){
