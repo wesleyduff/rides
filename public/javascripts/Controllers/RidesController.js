@@ -7,27 +7,33 @@ app //Our module. Assigned as a global variable in scripts.js
 //--------------------------------------------------------------
 
     .controller('RideController', ['$scope', 'groupFactoryResponse', 'rideFactoryResponse', function ($scope, groupFactoryResponse, rideFactoryResponse) {
-        /* -------------------
+        /* --------------------------------------
          Binded scope objects
          ng-bind
-         */
+         -------------------------------------- */
         $scope.pageTitle = "Back";  /* String */
         $scope.ride;                /* Object */
         $scope.group;               /* Object */
         $scope.createdUser;         /* Object */
         $scope.ridersAttending;     /* Array */
-        $scope.showRsvp = false;     /* Bool */
 
 
-        /* -------------------
+
+        /* --------------------------------------
          HOOOKS
          ng-show, ng-hide
-         */
+         -------------------------------------- */
+        $scope.showRsvp = false;     /* Bool */
+        $scope.hideRSVP = false;    /* Bool */
 
 
-        /* -------------------
-         On load we need to check if the user has been logged in using the session
-         */
+
+
+        /* -------------------------------------
+        ONLOAD (INIT) Methods
+         -------------------------------------- */
+
+        //On load we need to check if the user has been logged in using the session
         $scope.initRidePage = function(groupId, rideId){
             groupFactoryResponse.getGroup(groupId)
                 .then(function(response){
@@ -74,9 +80,14 @@ app //Our module. Assigned as a global variable in scripts.js
 
         };
 
-        /* -------------------
-         allow logged in user to register for ride if they are not the ride creator
-         */
+
+
+
+        /* -------------------------------------
+        On Click Methods
+         -------------------------------------- */
+
+         //allow logged in user to register for ride if they are not the ride creator
         $scope.addRider = function(){
             rideFactoryResponse.addRider($scope.ride, $scope.loggedInUser)
                 .then(function(response){

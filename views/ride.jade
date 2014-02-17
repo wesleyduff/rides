@@ -27,7 +27,7 @@ block content
 		.row(ng-hide="showRsvp")
 			.col-xs-12
 				.btn.btn-danger(ng-click="removeRSVPRider()") un-RSVP
-		.row(ng-show="showRsvp")
+		.row(ng-show="showRsvp" ng-hide="hideRSVP")
 			.col-xs-12
 				.btn.btn-primary(ng-click="addRider()") RSVP
 		br

@@ -23,8 +23,17 @@
 			"file": "public/javascripts/Controllers/RidesController.js",
 			"settings":
 			{
-				"buffer_size": 3990,
+				"buffer_size": 4580,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "@using Dell.UI.GlobalNavigation\n@model Dell.Transactional.Runtime.Search.SearchViewModel\n\n@{\n    ViewBag.Title = \"Index\";\n    Layout = \"~/Views/Shared/_TransactionalLayout.cshtml\";\n}\n\n@section HeaderMetaTags{\n    @Html.DisplayFor(m => m.MetaData)\n}\n@section PageStyles\n{\n   @Cdn.RenderCss(\"~/bundles/search-css\")\n}\n\n@section scripts\n{\n    @Cdn.RenderJs(\"~/bundles/shop-core\")\n    @Cdn.RenderJs(\"~/bundles/bootstrap\")\n    @Cdn.RenderJs(\"~/bundles/search-js\")\n\n    <script type=\"text/javascript\">\n        var serverUrls =\n        {\n            apiServiceUrl: '@System.Web.Configuration.WebConfigurationManager.AppSettings[\"apiServiceUrl\"]',\n        webServiceUrl: '@System.Web.Configuration.WebConfigurationManager.AppSettings[\"webServiceUrl\"]'\n    };\n    \n    @{\n        var defaultCountry = Model.UserContext == null ? \"us\" : Model.UserContext.Country;\n        var defaultLanguage = Model.UserContext == null ? \"en\" : Model.UserContext.Language;\n        var defaultCustomerSet = Model.UserContext == null ? \"19\" : Model.UserContext.CustomerSet;\n        var searchTermK = string.IsNullOrEmpty(Request.QueryString[\"k\"]) ? \"\" : Request.QueryString[\"k\"];\n        var searchTerm = string.IsNullOrEmpty(Request.QueryString[\"q\"]) ? searchTermK : Request.QueryString[\"q\"];\n        var searchCategory = string.IsNullOrEmpty(Request.QueryString[\"qc\"]) ? \"\" : Request.QueryString[\"qc\"];\n           \n    }\n\n        var searchOptions = {\n            country: '@defaultCountry',\n        language: '@defaultLanguage',\n        customer_set: '@defaultCustomerSet',\n        page_size: '@Model.ItemsPerPage',\n        search_term: '@searchTerm',\n        search_category: '@searchCategory',\n        search_api_url: '@System.Web.Configuration.WebConfigurationManager.AppSettings[\"searchApiUrl\"]',\n        search_api_key: '@System.Web.Configuration.WebConfigurationManager.AppSettings[\"searchApiKey\"]',\n        sort_size: 11,\n        showAddToCart: @Model.DisplayAddToCartButton.ToString().ToLower(),\n        paginatorLabel: '@Model.PaginationLabel'\n    };\n</script>\n}\n\n<div class=\"wrapper bottom-offset-mini\" data-ng-app=\"shop\" data-ng-controller=\"searchController\" data-ng-init=\"firstLoad()\" data-ng-cloak>\n\n    <div id=\"search-noresults\" class=\"ma-all da-all ta-all ma-padinfull\" data-ng-show=\"(SearchResult.ResultCount == '0' || searchTerm.length == 0 || SearchResult.ResultCount == null) && ContentLoaded\">\n        <h3>@Model.NoResultsHeader</h3>\n        <p>@Html.Raw(Model.NoResultsText)</p>\n    </div>\n\n    <div class=\"search-result\" data-ng-show=\"(LoadedItems.length > 0 || !ContentLoaded) && searchTerm.length > 0\">\n        <!-- Search Header BEGIN -->\n        <div class=\"ma-hide refining bottom-offset-mini\">\n            <span>\n                <!-- If is filtered add colon -->\n                @Model.RefineYourSearchLabel<span data-ng-show=\"SelectedFilter.length > 0\">:</span>\n                <!-- ng-repeat for selected filters -->\n                <strong data-ng-repeat=\"filter in SelectedFilter\">\n                    <!-- Add pipe separator between selected filters. (OOS for Oct FY14 release) -->\n                    <span class=\"text-blue pipe\" data-ng-hide=\"$first\">|</span>\n                    <a href=\"#\" data-ng-click=\"removeFilter(filter)\">\n                        <span>{{filter.Label}}</span>\n                        <span class=\"icon-ui-closecircle\"></span>\n                    </a>\n                </strong>\n            </span>\n        </div>\n        <div class=\"ma-all ta-all da-all gray-light well-large bottom-offset-small border-bottom-gray\">\n            <div class=\"mb1-mb2 ta1-ta3 da1-da4\">\n                <span class=\"top-offset-mini top-offset-7px\" data-ng-hide=\"isMobileMenuSort\">{{SearchResult.ResultCountText}}</span>\n                <p class=\"ta-hide da-hide top-offset-mini bottom-offset-micro\" data-ng-show=\"isMobileMenuSort\">@Model.SortByLabel</p>\n            </div>\n            \n\n            <div class=\"ma-hide ta4-ta9 da5-da12 ta-floatright da-floatright\">\n                <!-- Tablet BEGIN -->\n                <!-- Tablet Filter -->\n                <div class=\"btn-group dropdown-floatright filter-dropdown\" data-ng-hide=\"SearchResult.Categories.length <= 0\">\n                    <a class=\"btn dropdown-toggle dropdown-button ta-all da-all white\" role=\"button\">\n                        <strong class=\"ta-floatleft da-floatleft\">@Model.FilterLabel</strong>\n                        <span class=\"caret ma-floatright ta-floatright da-floatright\"></span>\n                    </a>\n                    <ul class=\"dropdown-menu right-offset-zero pull-right\" data-role=\"menu\" aria-labelledby=\"dropdownMenu\">\n                        <li class=\"text-gray stopProp\">\n                            <strong class=\"dropdown-subtitle\">@Model.ProductCategoriesLabel</strong>\n                        </li>\n                        <ul>\n                            <li data-ng-repeat=\"filter in SearchResult.Categories\">\n                                <a class=\"filter-option\" href=\"#\" data-ng-class=\"highlightFilter(filter)\" data-ng-click=\"selectFilter(filter)\">\n                                    <strong>{{filter.Label}}</strong>\n                                </a>\n                            </li>\n                        </ul>\n                    </ul>\n                </div>\n                <!-- Tablet Sort -->\n                <div class=\"btn-group dropdown-floatright\">\n                    <a class=\"btn dropdown-toggle dropdown-button ta-all da-all white\" role=\"button\" data-toggle=\"dropdown\" data-ng-show=\"SelectedFilter.length > 0\">\n                        <strong class=\"ta-floatleft da-floatleft\">{{adjustSortLabel()}}</strong>\n                        <span class=\"caret ma-floatright ta-floatright da-floatright\"></span>\n                    </a>\n                    <ul class=\"dropdown-menu\" data-role=\"menu\" aria-labelledby=\"dropdownMenu\">\n                        <li data-ng-repeat=\"sort in SearchResult.FilterOptions\">\n                            <a href=\"#\" data-ng-click=\"selectSort(sort)\" data-ng-class=\"highlightSort(sort.Value)\">\n                                <strong>{{sort.Value}}</strong>\n                            </a>\n                        </li>\n                    </ul>\n                </div>\n                <span class=\"vertical-align-middle dropdown-floatright top-offset-7px\" data-ng-show=\"SelectedFilter.length > 0\">\n                    @Model.SortByLabel\n                </span>\n                <!-- Tablet END -->\n            </div>\n            <!-- Mobile BEGIN -->\n            <div class=\"ma2 ta-hide da-hide\">\n                <!-- Mobile Sort -->\n                <a class=\"btn ma-all bottom-offset-zero\" role=\"button\" data-ng-show=\"SelectedFilter.length > 0 && (!isMobileMenuFilter && !isMobileMenuSort)\" data-ng-click=\"isMobileMenuSort = true\">\n                    @Model.MobileSortLabel\n                </a>\n            </div>\n            <div class=\"ma3 ta-hide da-hide\">\n                <!-- Mobile Filter -->\n                <a class=\"btn ma-all bottom-offset-zero\" role=\"button\" data-ng-hide=\"SearchResult.Categories.length <= 0 || isMobileMenuFilter || isMobileMenuSort\" data-ng-click=\"isMobileMenuFilter = true\">\n                    @Model.FilterLabel\n                </a>\n                <a class=\"btn ma-floatright bottom-offset-zero\" role=\"button\" data-ng-show=\"isMobileMenuSort\" data-ng-click=\"isMobileMenuSort = false\">\n                    @Model.CloseLabel\n                </a>\n                <a class=\"btn ma-floatright bottom-offset-zero\" role=\"button\" data-ng-show=\"isMobileMenuFilter\" data-ng-click=\"isMobileMenuFilter = false\">\n                    @Model.CloseLabel\n                </a>\n            </div>\n            <!-- Mobile END -->\n        </div>\n        <!-- Search Header END -->\n\n        <!-- Search Results BEGIN -->\n        <div class=\"ma-all ta-all da-all search-content\" data-ng-hide=\"isMobileMenuSort || isMobileMenuFilter\">\n            <div class=\"ma-all ta-hide da-hide refining bottom-offset-mini\">\n                <!-- ng-repeat for selected filters -->\n                <strong class=\"text-blue\" data-ng-repeat=\"filter in SelectedFilter\">\n                    <!-- Add pipe separator between selected filters. (OOS for Oct FY14 release) -->\n                    <span class=\"help-inline text-blue filter-separator\" data-ng-hide=\"$first\">|</span>\n                    <a href=\"#\" data-ng-click=\"removeFilter(filter)\">\n                        <span>{{filter.Label}}</span>\n                        <i class=\"icon-ui-closecircle\"></i>\n                    </a>\n                </strong>\n            </div>\n\n            @Html.Partial(\"_SearchResults\", Model)\n\n            <!-- Load More Results -->\n            <div id=\"search-pagination\" class=\"da-all ta-all ma-all\" data-ng-hide=\"shouldLoadMore || !ContentLoaded\" data-ng-cloak>\n                <button data-ng-click=\"loadMoreResults()\" class=\"btn\">\n                    <span class=\"text-blue\" data-ng-hide=\"hasLoadingIcon\">@Model.LoadMoreResultsLabel</span>\n                    <img data-ng-show=\"hasLoadingIcon\" src=\"@Url.Content(\"~/content/images/shop/loading_animation_square.gif\")\" alt=\"Loading...\" />\n                </button>\n            </div>\n        </div>\n        <!-- Search Results END -->\n\n        <!-- Mobile Nav Sort -->\n        <div class=\"ma-all ta-hide da-hide mobile-menu\" data-ng-show=\"isMobileMenuSort\">\n            <ul class=\"padding-zero\">\n                <li data-ng-repeat=\"sort in SearchResult.FilterOptions\">\n                    <a href=\"#\" data-ng-click=\"selectSort(sort)\" data-ng-class=\"highlightSort(sort.Value)\">{{sort.Value}}\n                    </a>\n                </li>\n            </ul>\n            <div class=\"ma-all ta-hide da-hide well-large gray-light border-top-gray\">\n                <a class=\"btn ma-floatright\" role=\"button\" data-ng-click=\"isMobileMenuSort = false\">\n                    @Model.CloseLabel\n                </a>\n            </div>\n        </div>\n        <!-- Mobile Nav Filter -->\n        <div class=\"ma-all ta-hide da-hide mobile-menu filter-dropdown\" data-ng-show=\"isMobileMenuFilter\">\n            <ul>\n                <li class=\"text-gray bottom-offset-mini top-offset-mini no-border\">\n                    @Model.ProductCategoriesLabel\n                </li>\n                <ul>\n                    <li data-ng-repeat=\"filter in SearchResult.Categories\">\n                        <a class=\"filter-option\" data-ng-class=\"highlightFilter(filter)\" data-ng-click=\"selectFilter(filter)\" href=\"#\">{{filter.Label}}\n                        </a>\n                    </li>\n                </ul>\n            </ul>\n            <div class=\"ma-all ta-hide da-hide well-large gray-light border-top-gray\">\n                <a class=\"btn ma-floatright\" role=\"button\" data-ng-click=\"isMobileMenuFilter = false\">\n                    @Model.CloseLabel\n                </a>\n            </div>\n        </div>\n    </div>\n</div>\n",
+			"settings":
+			{
+				"buffer_size": 10896,
+				"line_ending": "Windows",
+				"name": "@using Dell.UI.GlobalNavigation"
 			}
 		}
 	],
@@ -84,6 +93,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ng-repeat"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -101,7 +111,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -109,15 +119,15 @@
 					"file": "public/javascripts/Controllers/RidesController.js",
 					"settings":
 					{
-						"buffer_size": 3990,
+						"buffer_size": 4580,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								748,
-								748
+								0,
+								0
 							]
 						],
 						"settings":
@@ -128,6 +138,34 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 180.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"settings":
+					{
+						"buffer_size": 10896,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8690,
+								9197
+							]
+						],
+						"settings":
+						{
+							"auto_name": "@using Dell.UI.GlobalNavigation",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3570.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
